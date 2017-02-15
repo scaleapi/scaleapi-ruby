@@ -8,12 +8,13 @@ class Scale
     end
   end
 
-  def initialize(api_key: nil, callback_auth_key: nil, default_request_params: {}, logging: false)
+  def initialize(api_key: nil, callback_auth_key: nil, default_request_params: {}, logging: false, callback_url: nil)
     Scale.validate_api_key(api_key)
 
     self.api_key = api_key
     self.callback_auth_key = callback_auth_key
-    self.default_request_params = default_request_params
+    self.default_request_params = default_request_params.merge(callback_url: callback_url)
+    self.logging = logging
   end
 
   def live?

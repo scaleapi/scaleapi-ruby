@@ -33,7 +33,8 @@ class Scale
     end
 
     def post(url, body = {})
-      body = (default_request_params.merge(body))
+      body.delete(:callback_url) if body.keys.include?(:callback_url) && body[:callback_url].nil?
+      body = default_request_params.merge(body)
 
       response = connection.post do |req|
         req.url "#{SCALE_API_URL}#{url}"
