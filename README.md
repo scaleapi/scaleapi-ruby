@@ -129,8 +129,9 @@ scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KE
 
 scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback', 
-  instruction: 'Find the URL for the hiring page for the company with attached website.'
+  instruction: 'Find the URL for the hiring page for the company with attached website.',
   attachment: 'https://www.scaleapi.com/',
+  attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
   }
@@ -147,8 +148,9 @@ scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KE
 scale.tasks.create({
   type: 'datacollection'
   callback_url: 'http://www.example.com/callback', 
-  instruction: 'Find the URL for the hiring page for the company with attached website.'
+  instruction: 'Find the URL for the hiring page for the company with attached website.',
   attachment: 'https://www.scaleapi.com/',
+  attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
   }
@@ -175,16 +177,17 @@ scale.create_annotation_task({
   objects_to_annotate: ['baby cow', 'big cow'],
   with_labels: true,
   examples: [
-  {
-    correct: false,
-    image: 'http://i.imgur.com/lj6e98s.jpg',
-    explanation: 'The boxes are tight and accurate'
-  },
-  {
-    correct: true,
-    image: 'http://i.imgur.com/HIrvIDq.jpg',
-    explanation: 'The boxes are neither accurate nor complete'
-  }
+    {
+      correct: false,
+      image: 'http://i.imgur.com/lj6e98s.jpg',
+      explanation: 'The boxes are tight and accurate'
+    },
+    {
+      correct: true,
+      image: 'http://i.imgur.com/HIrvIDq.jpg',
+      explanation: 'The boxes are neither accurate nor complete'
+    }
+  ]
 })
 ```
 Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](
@@ -198,7 +201,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'annotation'
+  type: 'annotation',
   callback_url: 'http://www.example.com/callback',
   instruction: 'Draw a box around each **baby cow** and **big cow**',
   attachment_type: 'image',
@@ -206,16 +209,17 @@ scale.tasks.create({
   objects_to_annotate: ['baby cow', 'big cow'],
   with_labels: true,
   examples: [
-  {
-    correct: false,
-    image: 'http://i.imgur.com/lj6e98s.jpg',
-    explanation: 'The boxes are tight and accurate'
-  },
-  {
-    correct: true,
-    image: 'http://i.imgur.com/HIrvIDq.jpg',
-    explanation: 'The boxes are neither accurate nor complete'
-  }
+    {
+      correct: false,
+      image: 'http://i.imgur.com/lj6e98s.jpg',
+      explanation: 'The boxes are tight and accurate'
+    },
+    {
+      correct: true,
+      image: 'http://i.imgur.com/HIrvIDq.jpg',
+      explanation: 'The boxes are neither accurate nor complete'
+    }
+  ]
 })
 ```
 
@@ -254,7 +258,8 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'phonecall'
+  type: 'phonecall',
+  callback_url: 'http://www.example.com/callback',
   instruction: 'Call this person and follow the script provided, recording responses',
   phone_number: '5055006865',
   entity_name: 'Alexandr Wang',
@@ -297,7 +302,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'transcription'
+  type: 'transcription',
   callback_url: 'http://www.example.com/callback',
   instruction: 'Transcribe the given fields.',
   attachment_type: 'website',
@@ -321,7 +326,7 @@ To create an [audio transcription task](https://docs.scaleapi.com/#create-audio-
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
-scale.create_transcription_task({
+scale.create_audiotranscription_task({
   callback_url: 'http://www.example.com/callback',
   attachment_type: 'audio',
   attachment: 'https://storage.googleapis.com/deepmind-media/pixie/knowing-what-to-say/second-list/speaker-3.wav',
@@ -337,7 +342,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'audiotranscription'
+  type: 'audiotranscription',
   callback_url: 'http://www.example.com/callback',
   attachment_type: 'audio',
   attachment: 'https://storage.googleapis.com/deepmind-media/pixie/knowing-what-to-say/second-list/speaker-3.wav',
@@ -357,18 +362,36 @@ To get a list of tasks, run the following command:
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
-task_list = scale.tasks.list
-first_task = task_list.first
-
-task_list
+scale.tasks.list
 ```
 
 This will return a `Scale::Api::TaskList` object.
 
+`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list.map(&:id)
+```
+
+This will return an array containing the last 100 tasks' `task_id`.
+
+You can also access it like a normal array:
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list[0]
+```
+
+This will return the appropriate Task object (or nil if empty).
+
 You can filter this list by:
 - `start_time` (which expects a `Time` object)
 - `end_time` (which expects a `Time` object)
-- `type` (which expects one of the [tasks types](##task-object))
+- `type` (which expects one of the [tasks types](#user-content-task-object)
 - `status` (which expects a string which is either `completed`, `pending`, or `canceled`)
 
 For example:
@@ -381,17 +404,6 @@ scale.tasks.list(end_time: Time.parse('January 20th, 2017'), status: 'completed'
 ```
 
 This will return a `Scale::Api::TaskList` object up to 100 tasks that were completed by January 20th, 2017.
-
-
-`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
-```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
-
-scale.tasks.list.map(&:id)
-```
-
-This will return an array containing the last 100 tasks' `task_id`.
 
 By default, `scale.tasks.list` only returns up to 100 tasks, but you can pass in the `limit` yourself.
 
@@ -406,6 +418,8 @@ second_page = first_page.next_page
 ```
 
 `Scale::Api::TaskList#next_page` returns the next page in the list of tasks (as a new `Scale::Api::TaskList`). You can see if there are more pages by calling `Scale::Api::TaskList#has_more?` on the object.
+
+`scale.tasks.list` is aliased to `scale.tasks.where` and `scale.tasks.all`.
 
 For more information, [read our documentation](https://docs.scaleapi.com/#list-all-tasks)
 
@@ -447,7 +461,7 @@ task_id = 'TASK_ID'
 scale.tasks.find(task_id).cancel!
 ```
 
-Both ways will return a new [task object](#task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
+Both ways will return a new [task object](#user-content-task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
 
 ## Task Object
 
