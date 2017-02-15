@@ -84,7 +84,7 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::Categorization` object.
 
-[Read more about creating categorization tasks]((https://docs.scaleapi.com/#create-categorization-task)
+[Read more about creating categorization tasks](https://docs.scaleapi.com/#create-categorization-task)
 
 ### Comparison Tasks
 
