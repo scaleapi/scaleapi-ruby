@@ -441,7 +441,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 task_id = 'TASK_ID'
-scale.tasks.find(task_id).cancel
+scale.tasks.find(task_id).cancel!
 ```
 
 Both ways will return a new [task object](#task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
