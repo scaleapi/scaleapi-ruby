@@ -1,11 +1,17 @@
 class Scale
   class Api
     class Callback
-      attr_reader :client, :response, :task, :task_id
+      attr_reader :client, :response, :task, :task_id, :request_callback_key
 
       def initialize(params, callback_key: nil, client: nil)
+        @client = client
         @response = params[:response]
-        @task = BaseTask.from_hash(params[:task].merge('client': client))
+        @request_callback_key = callback_key
+
+        if params['task']
+          @task_id = params['task']['id']
+          @task = Scale::Api::Tasks::BaseTask.from_hash(params['task'].merge('client': client))
+        end
       end
 
       def verified?
@@ -13,7 +19,7 @@ class Scale
       end
 
       def self.valid_callback_auth_key?(callback_key, request_callback_key)
-        callback_key && request_callback_key && request_callback_key == callback_key
+        !!(callback_key && request_callback_key && request_callback_key == callback_key)
       end
     end
   end
