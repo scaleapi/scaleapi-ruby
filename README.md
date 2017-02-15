@@ -485,6 +485,33 @@ All tasks return a task object for their `type`. Currently, this gem supports th
 
 At the time of writing, this is every task type that Scale supports.
 
+### Convenience Methods
+
+Every one of the task type objects has the following convenience (instance) methods:
+- `day?`: returns `true` when a task's `urgency` is set to `day`
+- `week?`: returns `true` when a task's `urgency` is set to `week`
+- `immediate?`: returns `true` when a task's `urgency` is set to `immediate`
+- `pending?`: returns `true` when a task's `status` is set to `pending`
+- `completed?`: returns `true` when a task's `status` is set to `completed`
+- `canceled?`: returns `true` when a task's `status` is set to `canceled`
+- `callback_succeeded`: returns `true` when the response from the callback was successful
+
+You can also access all the properties of the task object directly, some examples:
+```ruby
+irb(main):009:0> task.instruction
+=> "Find the URL for the hiring page for the company with attached website."
+```
+
+```ruby
+irb(main):013:0> task.metadata
+=> {"bagel"=>true}
+```
+
+```ruby
+irb(main):016:0> task.completed_at
+=> 2017-02-10 20:41:12 UTC
+```
+
 ## Callbacks
 
 This gem allows you to create and parse callback data, so it can be easily used for web applications:
