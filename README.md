@@ -57,7 +57,7 @@ scale.create_categorization_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It will raise one of the [errors](#errors) if it's not successful.
+Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It will raise one of the [errors](#user-content-errors) if it's not successful.
 
 Alternatively, you cna also create a task this way
 ```ruby
@@ -91,11 +91,12 @@ scale.create_comparison_task({
     'http://i.ebayimg.com/00/$T2eC16dHJGwFFZKjy5ZjBRfNyMC4Ig~~_32.JPG',
     'http://images.wisegeek.com/checkered-tablecloth.jpg'
   ],
+  attachment_type: 'image',
   choices: ['yes', 'no']
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you cna also create a task this way
 ```ruby
@@ -110,6 +111,7 @@ scale.tasks.create({
     'http://i.ebayimg.com/00/$T2eC16dHJGwFFZKjy5ZjBRfNyMC4Ig~~_32.JPG',
     'http://images.wisegeek.com/checkered-tablecloth.jpg'
   ],
+  attachment_type: 'image',
   choices: ['yes', 'no']
 })
 ```
@@ -125,7 +127,7 @@ To create a [datacollection task](https://docs.scaleapi.com/#create-datacollecti
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
-scale.create_comparison_task({
+scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback', 
   instruction: 'Find the URL for the hiring page for the company with attached website.'
   attachment: 'https://www.scaleapi.com/',
@@ -135,7 +137,7 @@ scale.create_comparison_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you cna also create a task this way
 ```ruby
@@ -185,7 +187,8 @@ scale.create_annotation_task({
   }
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](
+).
 
 Note: `create_annotation_task` is also aliased to `create_image_recognition_task`, to help avoid confusion.
 
@@ -241,7 +244,7 @@ scale.create_phone_call_task({
   choices: ['He is happy', 'He is not happy']
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to help avoid confusion.
 
@@ -286,7 +289,7 @@ scale.create_transcription_task({
   }
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you cna also create a task this way
 ```ruby
@@ -326,7 +329,7 @@ scale.create_transcription_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#errors).
+Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you cna also create a task this way
 ```ruby

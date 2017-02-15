@@ -4,7 +4,7 @@ require 'json'
 
 class Scale
   class Api < Struct.new(:api_key, :callback_auth_key, :default_request_params, :logging)
-    SCALE_API_URL = 'http://127.0.0.1:3000/v1/'
+    SCALE_API_URL = 'https://api.scaleapi.com/v1/'
 
     def connection
       @connection ||= Faraday.new(:url => SCALE_API_URL) do |faraday|
