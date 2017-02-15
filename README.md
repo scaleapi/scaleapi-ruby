@@ -494,7 +494,7 @@ Every one of the task type objects has the following convenience (instance) meth
 - `pending?`: returns `true` when a task's `status` is set to `pending`
 - `completed?`: returns `true` when a task's `status` is set to `completed`
 - `canceled?`: returns `true` when a task's `status` is set to `canceled`
-- `callback_succeeded`: returns `true` when the response from the callback was successful
+- `callback_succeeded?`: returns `true` when the response from the callback was successful
 
 You can also access all the properties of the task object directly, some examples:
 ```ruby
