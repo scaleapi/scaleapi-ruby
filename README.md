@@ -146,7 +146,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'datacollection'
+  type: 'datacollection',
   callback_url: 'http://www.example.com/callback', 
   instruction: 'Find the URL for the hiring page for the company with attached website.',
   attachment: 'https://www.scaleapi.com/',
