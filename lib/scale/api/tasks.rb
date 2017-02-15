@@ -17,7 +17,6 @@ class Scale
         TaskList.new({
           client: client,
           docs: body['docs'],
-          count: body['count'],
           limit: body['limit'],
           offset: body['offset'],
           has_more: body['has_more'],

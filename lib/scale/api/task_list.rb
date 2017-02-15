@@ -12,9 +12,8 @@ class Scale
     class TaskList
       include Enumerable
       extend Forwardable
-      def_delegators :@docs, :each, :<<, :[], :[]=
-      attr_accessor :client, :docs, :count, :limit, :offset, :has_more, :params
-      alias_method :length, :count
+      def_delegators :@docs, :each, :<<, :[], :[]=, :length, :count
+      attr_accessor :client, :docs, :limit, :offset, :has_more, :params
       TASK_TYPES_TO_CLASSNAMES = {
         'audiotranscription': ::Scale::Api::Tasks::AudioTranscription,
         'categorization': ::Scale::Api::Tasks::Categorization,

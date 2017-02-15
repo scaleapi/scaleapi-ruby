@@ -13,16 +13,14 @@ class Scale
         faraday.response :logger if logging       # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
-    rescue Faraday::Error::ConnectionFailed => e
-      raise Scale::Api::ConnectionError
     end
 
     def get(url, params = {})
       response = connection.get do |req|
         req.url "#{SCALE_API_URL}#{url}"
         req.params.merge!(default_request_params.merge(params))
-        req.headers['X-API-Client-Language'] = "Ruby"
-        req.headers['X-API-Client-Version']  = Scale::VERSION
+        req.headers['X-API-Client'] = "Ruby"
+        req.headers["X-API-Client-Version"] = Scale::VERSION
       end
 
       if response.status != 200
@@ -30,13 +28,19 @@ class Scale
       end
 
       response
+    rescue Faraday::Error::ConnectionFailed
+      raise Scale::Api::ConnectionError
     end
 
     def post(url, body = {})
+      body = (default_request_params.merge(body))
+
       response = connection.post do |req|
         req.url "#{SCALE_API_URL}#{url}"
-        req.body = (default_request_params.merge(body))
-        req.headers['X-API-Client'] = "Ruby-#{Scale::VERSION}"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = body.to_json
+        req.headers['X-API-Client'] = "Ruby"
+        req.headers["X-API-Client-Version"] = Scale::VERSION
       end
 
       if response.status != 200
@@ -44,6 +48,8 @@ class Scale
       end
 
       response
+    rescue Faraday::Error::ConnectionFailed
+      raise Scale::Api::ConnectionError
     end
 
     def handle_error(response)
