@@ -11,6 +11,8 @@ This is the official Scale API RubyGem (`scaleapi`).
 - Triage support tickets
 - Categorize and compare images, documents, and webpages
 
+Scale is actively hiring software engineers - [apply here](https://www.scaleapi.com/about#jobs).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -40,6 +42,13 @@ scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KE
 If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://dashboard.scaleapi.com). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
 
 ## Creating Tasks
+
+This gem supports two ways of creating tasks. You can call `create_#{tasktype}_task` on the `scale` object or you can call `scale.tasks.create` and pass in the corresponding `type`. Upon success, it will return the appropriate object for that task type. Upon failure, it will raise an application-level error.
+
+For every type of task, you can pass in the following options when creating:
+- `callback_url`: a URL to send the webhook to upon completion. This is required when there is no default callback URL set when either initializing the `Scale` object or in your account settings.
+- `urgency`: a string indicating how long the task should take, options are `immediate`, `day`, or `week`. The default is `day`.
+- `metadata`: a `Hash` that contains anything you want in it. Use it for storing data relevant to that task, such as an internal ID for your application to associate the task with. Note that the keys of the `Hash` will be returned as `String` rather than `Symbol`.
 
 ### Categoriation Tasks
 
