@@ -530,8 +530,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/scaleapi-ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/scaleapi/scaleapi-ruby.
 
+Currently, this repository has no tests - and adding tests using RSpec would make a for a great PR :)
 
 ## License
 
