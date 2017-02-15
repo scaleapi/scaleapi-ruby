@@ -11,6 +11,8 @@ This is the official Scale API RubyGem (`scaleapi`).
 - Triage support tickets
 - Categorize and compare images, documents, and webpages
 
+Scale is actively hiring software engineers - [apply here](https://www.scaleapi.com/about#jobs).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -41,6 +43,13 @@ If you're having trouble finding your API Key or Callback Auth Key, then go to t
 
 ## Creating Tasks
 
+This gem supports two ways of creating tasks. You can call `create_#{tasktype}_task` on the `scale` object or you can call `scale.tasks.create` and pass in the corresponding `type`. Upon success, it will return the appropriate object for that task type. Upon failure, it will raise an application-level error.
+
+For every type of task, you can pass in the following options when creating:
+- `callback_url`: a URL to send the webhook to upon completion. This is required when there is no default callback URL set when either initializing the `Scale` object or in your account settings.
+- `urgency`: a string indicating how long the task should take, options are `immediate`, `day`, or `week`. The default is `day`.
+- `metadata`: a `Hash` that contains anything you want in it. Use it for storing data relevant to that task, such as an internal ID for your application to associate the task with. Note that the keys of the `Hash` will be returned as `String` rather than `Symbol`.
+
 ### Categoriation Tasks
 
 To create a [categorization task](https://docs.scaleapi.com/#create-categorization-task), run the following:
@@ -59,7 +68,7 @@ scale.create_categorization_task({
 
 Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It will raise one of the [errors](#user-content-errors) if it's not successful.
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
@@ -98,7 +107,7 @@ scale.create_comparison_task({
 
 Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
@@ -129,8 +138,9 @@ scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KE
 
 scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback', 
-  instruction: 'Find the URL for the hiring page for the company with attached website.'
+  instruction: 'Find the URL for the hiring page for the company with attached website.',
   attachment: 'https://www.scaleapi.com/',
+  attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
   }
@@ -139,16 +149,17 @@ scale.create_datacollection_task({
 
 Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'datacollection'
+  type: 'datacollection',
   callback_url: 'http://www.example.com/callback', 
-  instruction: 'Find the URL for the hiring page for the company with attached website.'
+  instruction: 'Find the URL for the hiring page for the company with attached website.',
   attachment: 'https://www.scaleapi.com/',
+  attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
   }
@@ -175,16 +186,17 @@ scale.create_annotation_task({
   objects_to_annotate: ['baby cow', 'big cow'],
   with_labels: true,
   examples: [
-  {
-    correct: false,
-    image: 'http://i.imgur.com/lj6e98s.jpg',
-    explanation: 'The boxes are tight and accurate'
-  },
-  {
-    correct: true,
-    image: 'http://i.imgur.com/HIrvIDq.jpg',
-    explanation: 'The boxes are neither accurate nor complete'
-  }
+    {
+      correct: false,
+      image: 'http://i.imgur.com/lj6e98s.jpg',
+      explanation: 'The boxes are tight and accurate'
+    },
+    {
+      correct: true,
+      image: 'http://i.imgur.com/HIrvIDq.jpg',
+      explanation: 'The boxes are neither accurate nor complete'
+    }
+  ]
 })
 ```
 Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](
@@ -192,13 +204,13 @@ Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. I
 
 Note: `create_annotation_task` is also aliased to `create_image_recognition_task`, to help avoid confusion.
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'annotation'
+  type: 'annotation',
   callback_url: 'http://www.example.com/callback',
   instruction: 'Draw a box around each **baby cow** and **big cow**',
   attachment_type: 'image',
@@ -206,16 +218,17 @@ scale.tasks.create({
   objects_to_annotate: ['baby cow', 'big cow'],
   with_labels: true,
   examples: [
-  {
-    correct: false,
-    image: 'http://i.imgur.com/lj6e98s.jpg',
-    explanation: 'The boxes are tight and accurate'
-  },
-  {
-    correct: true,
-    image: 'http://i.imgur.com/HIrvIDq.jpg',
-    explanation: 'The boxes are neither accurate nor complete'
-  }
+    {
+      correct: false,
+      image: 'http://i.imgur.com/lj6e98s.jpg',
+      explanation: 'The boxes are tight and accurate'
+    },
+    {
+      correct: true,
+      image: 'http://i.imgur.com/HIrvIDq.jpg',
+      explanation: 'The boxes are neither accurate nor complete'
+    }
+  ]
 })
 ```
 
@@ -248,13 +261,14 @@ Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fa
 
 Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to help avoid confusion.
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'phonecall'
+  type: 'phonecall',
+  callback_url: 'http://www.example.com/callback',
   instruction: 'Call this person and follow the script provided, recording responses',
   phone_number: '5055006865',
   entity_name: 'Alexandr Wang',
@@ -291,13 +305,13 @@ scale.create_transcription_task({
 ```
 Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'transcription'
+  type: 'transcription',
   callback_url: 'http://www.example.com/callback',
   instruction: 'Transcribe the given fields.',
   attachment_type: 'website',
@@ -321,7 +335,7 @@ To create an [audio transcription task](https://docs.scaleapi.com/#create-audio-
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
-scale.create_transcription_task({
+scale.create_audiotranscription_task({
   callback_url: 'http://www.example.com/callback',
   attachment_type: 'audio',
   attachment: 'https://storage.googleapis.com/deepmind-media/pixie/knowing-what-to-say/second-list/speaker-3.wav',
@@ -331,13 +345,13 @@ scale.create_transcription_task({
 
 Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
-Alternatively, you cna also create a task this way
+Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
-  type: 'audiotranscription'
+  type: 'audiotranscription',
   callback_url: 'http://www.example.com/callback',
   attachment_type: 'audio',
   attachment: 'https://storage.googleapis.com/deepmind-media/pixie/knowing-what-to-say/second-list/speaker-3.wav',
@@ -357,18 +371,36 @@ To get a list of tasks, run the following command:
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
-task_list = scale.tasks.list
-first_task = task_list.first
-
-task_list
+scale.tasks.list
 ```
 
 This will return a `Scale::Api::TaskList` object.
 
+`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list.map(&:id)
+```
+
+This will return an array containing the last 100 tasks' `task_id`.
+
+You can also access it like a normal array:
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list[0]
+```
+
+This will return the appropriate Task object (or nil if empty).
+
 You can filter this list by:
 - `start_time` (which expects a `Time` object)
 - `end_time` (which expects a `Time` object)
-- `type` (which expects one of the [tasks types](##task-object))
+- `type` (which expects one of the [tasks types](#user-content-task-object)
 - `status` (which expects a string which is either `completed`, `pending`, or `canceled`)
 
 For example:
@@ -381,17 +413,6 @@ scale.tasks.list(end_time: Time.parse('January 20th, 2017'), status: 'completed'
 ```
 
 This will return a `Scale::Api::TaskList` object up to 100 tasks that were completed by January 20th, 2017.
-
-
-`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
-```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
-
-scale.tasks.list.map(&:id)
-```
-
-This will return an array containing the last 100 tasks' `task_id`.
 
 By default, `scale.tasks.list` only returns up to 100 tasks, but you can pass in the `limit` yourself.
 
@@ -406,6 +427,8 @@ second_page = first_page.next_page
 ```
 
 `Scale::Api::TaskList#next_page` returns the next page in the list of tasks (as a new `Scale::Api::TaskList`). You can see if there are more pages by calling `Scale::Api::TaskList#has_more?` on the object.
+
+`scale.tasks.list` is aliased to `scale.tasks.where` and `scale.tasks.all`.
 
 For more information, [read our documentation](https://docs.scaleapi.com/#list-all-tasks)
 
@@ -447,7 +470,7 @@ task_id = 'TASK_ID'
 scale.tasks.find(task_id).cancel!
 ```
 
-Both ways will return a new [task object](#task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
+Both ways will return a new [task object](#user-content-task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
 
 ## Task Object
 
@@ -461,6 +484,33 @@ All tasks return a task object for their `type`. Currently, this gem supports th
 - `audiotranscription` (`Scale::Api::Tasks::AudioTranscription`)
 
 At the time of writing, this is every task type that Scale supports.
+
+### Convenience Methods
+
+Every one of the task type objects has the following convenience (instance) methods:
+- `day?`: returns `true` when a task's `urgency` is set to `day`
+- `week?`: returns `true` when a task's `urgency` is set to `week`
+- `immediate?`: returns `true` when a task's `urgency` is set to `immediate`
+- `pending?`: returns `true` when a task's `status` is set to `pending`
+- `completed?`: returns `true` when a task's `status` is set to `completed`
+- `canceled?`: returns `true` when a task's `status` is set to `canceled`
+- `callback_succeeded?`: returns `true` when the response from the callback was successful
+
+You can also access all the properties of the task object directly, some examples:
+```ruby
+irb(main):009:0> task.instruction
+=> "Find the URL for the hiring page for the company with attached website."
+```
+
+```ruby
+irb(main):013:0> task.metadata
+=> {"bagel"=>true}
+```
+
+```ruby
+irb(main):016:0> task.completed_at
+=> 2017-02-10 20:41:12 UTC
+```
 
 ## Callbacks
 
@@ -507,8 +557,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/scaleapi-ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/scaleapi/scaleapi-ruby.
 
+Currently, this repository has no tests - and adding tests using RSpec would make a for a great PR :)
 
 ## License
 
