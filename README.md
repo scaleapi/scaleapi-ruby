@@ -346,6 +346,105 @@ This will also return a `Scale::Api::Tasks::AudioTranscription` object.
 
 [Read more about creating audio transcription tasks](https://docs.scaleapi.com/#create-audio-transcription-task)
 
+## Listing Tasks
+
+To get a list of tasks, run the following command:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+task_list = scale.tasks.list
+first_task = task_list.first
+
+task_list
+```
+
+This will return a `Scale::Api::TaskList` object.
+
+You can filter this list by:
+- `start_time` (which expects a `Time` object)
+- `end_time` (which expects a `Time` object)
+- `type` (which expects one of the [tasks types](##task-object))
+- `status` (which expects a string which is either `completed`, `pending`, or `canceled`)
+
+For example:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list(end_time: Time.parse('January 20th, 2017'), status: 'completed')
+```
+
+This will return a `Scale::Api::TaskList` object up to 100 tasks that were completed by January 20th, 2017.
+
+
+`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+scale.tasks.list.map(&:id)
+```
+
+This will return an array containing the last 100 tasks' `task_id`.
+
+By default, `scale.tasks.list` only returns up to 100 tasks, but you can pass in the `limit` yourself.
+
+It also supports pagination, here's an example:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+first_page = scale.tasks.list
+second_page = first_page.next_page
+```
+
+`Scale::Api::TaskList#next_page` returns the next page in the list of tasks (as a new `Scale::Api::TaskList`). You can see if there are more pages by calling `Scale::Api::TaskList#has_more?` on the object.
+
+For more information, [read our documentation](https://docs.scaleapi.com/#list-all-tasks)
+
+## Finding tasks by ID
+
+To find a task by ID, run the following:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+task_id = 'TASK_ID'
+scale.tasks.find(task_id)
+```
+
+This will return the appropriate Scaler::Api::Tasks object based on the [task type](#task-types)
+
+## Canceling tasks
+
+There are two ways to cancel a task.
+
+Cancel by `task_id`:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+task_id = 'TASK_ID'
+scale.tasks.cancel(task_id)
+```
+
+Cancel on the task object:
+
+```ruby
+require 'scale'
+scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+task_id = 'TASK_ID'
+scale.tasks.find(task_id).cancel
+```
+
+Both ways will return a new [task object](#task-object) for the type, with the `status` set to `canceled` and calling `canceled?` on the task will return true.
 
 ## Task Object
 
@@ -360,6 +459,42 @@ All tasks return a task object for their `type`. Currently, this gem supports th
 
 At the time of writing, this is every task type that Scale supports.
 
+## Callbacks
+
+This gem allows you to create and parse callback data, so it can be easily used for web applications:
+
+For example, for Ruby on Rails:
+
+```ruby
+# app/controllers/scale_api_controller.rb
+
+require 'scale'
+
+class ScaleApiController < ApplicationController
+  # POST /scale_api
+  def create
+    scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+
+    callback = scale.build_callback params, callback_key: request.headers['scale-callback-auth']
+    callback.response # Response content hash (code and result)
+    callback.task     # Scale::Resources::Task object
+  end
+end
+```
+
+## Errors
+
+This gem will raise exceptions on application-level errors. Here are the list of errors:
+
+```ruby
+Scale::Api::BadRequest
+Scale::Api::TooManyRequests
+Scale::Api::NotFound
+Scale::Api::Unauthorized
+Scale::Api::InternalServerError
+Scale::Api::ConnectionError
+Scale::Api::APIKeyInvalid
+```
 
 ## Development
 

@@ -1,6 +1,6 @@
 class Scale
   VERSION = "0.1.0"
-  attr_accessor :api_key, :callback_auth_key, :default_request_params
+  attr_accessor :api_key, :callback_auth_key, :default_request_params, :logging
 
   def self.validate_api_key(api_key)
     if api_key.length < 5 || !(api_key.start_with?('live') || api_key.start_with?('test')) 
@@ -8,7 +8,7 @@ class Scale
     end
   end
 
-  def initialize(api_key: nil, callback_auth_key: nil, default_request_params: {})
+  def initialize(api_key: nil, callback_auth_key: nil, default_request_params: {}, logging: false)
     Scale.validate_api_key(api_key)
 
     self.api_key = api_key
@@ -25,7 +25,7 @@ class Scale
   end
 
   def client
-    @client ||= Api.new(api_key, callback_auth_key, default_request_params)
+    @client ||= Api.new(api_key, callback_auth_key, default_request_params, logging)
   end
 
   def tasks
@@ -91,5 +91,4 @@ require 'scale/api/tasks/comparison'
 require 'scale/api/tasks/image_recognition'
 require 'scale/api/tasks/phone_call'
 require 'scale/api/tasks/transcription'
-require 'scale/callback'
 require 'scale/api/task_list'

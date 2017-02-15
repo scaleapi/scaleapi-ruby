@@ -19,4 +19,5 @@ class Scale
   end
 end
 
+require 'scale/api/tasks'
 require 'scale/api/tasks/base_task'
