@@ -400,7 +400,7 @@ This will return the appropriate Task object (or nil if empty).
 You can filter this list by:
 - `start_time` (which expects a `Time` object)
 - `end_time` (which expects a `Time` object)
-- `type` (which expects one of the [tasks types](#user-content-task-object)
+- `type` (which expects one of the [tasks types](#user-content-task-object))
 - `status` (which expects a string which is either `completed`, `pending`, or `canceled`)
 
 For example:
