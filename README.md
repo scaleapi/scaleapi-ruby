@@ -1,4 +1,5 @@
 # Scale API
+![Scale API Logo](https://www.scaleapi.com/static/global/facebook-card.png)
 
 This is the official Scale API RubyGem (`scaleapi`).
 
@@ -48,26 +49,26 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.create_categorization_task({
-  callback_url: "http://www.example.com/callback", 
-  instruction: "Is this company public or private?", 
-  attachment_type: "website", 
-  attachment: "https://www.google.com", 
+  callback_url: 'http://www.example.com/callback', 
+  instruction: 'Is this company public or private?', 
+  attachment_type: 'website', 
+  attachment: 'https://www.google.com', 
   categories: ['public', 'private']
 })
 ```
 
 Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It will raise one of the [errors](#errors) if it's not successful.
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 scale.tasks.create({
   type: 'categorization',
-  callback_url: "http://www.example.com/callback", 
-  instruction: "Is this company public or private?", 
-  attachment_type: "website", 
-  attachment: "https://www.google.com", 
+  callback_url: 'http://www.example.com/callback', 
+  instruction: 'Is this company public or private?', 
+  attachment_type: 'website', 
+  attachment: 'https://www.google.com', 
   categories: ['public', 'private']
 })
 ```
@@ -84,8 +85,8 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.create_comparison_task({
-  callback_url: "http://www.example.com/callback", 
-  instruction: "Do the objects in these images have the same pattern?", 
+  callback_url: 'http://www.example.com/callback', 
+  instruction: 'Do the objects in these images have the same pattern?', 
   attachments: [
     'http://i.ebayimg.com/00/$T2eC16dHJGwFFZKjy5ZjBRfNyMC4Ig~~_32.JPG',
     'http://images.wisegeek.com/checkered-tablecloth.jpg'
@@ -96,15 +97,15 @@ scale.create_comparison_task({
 
 Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#errors).
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
   type: 'comparison',
-  callback_url: "http://www.example.com/callback", 
-  instruction: "Do the objects in these images have the same pattern?", 
+  callback_url: 'http://www.example.com/callback', 
+  instruction: 'Do the objects in these images have the same pattern?', 
   attachments: [
     'http://i.ebayimg.com/00/$T2eC16dHJGwFFZKjy5ZjBRfNyMC4Ig~~_32.JPG',
     'http://images.wisegeek.com/checkered-tablecloth.jpg'
@@ -125,29 +126,29 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.create_comparison_task({
-  callback_url: "http://www.example.com/callback", 
+  callback_url: 'http://www.example.com/callback', 
   instruction: 'Find the URL for the hiring page for the company with attached website.'
   attachment: 'https://www.scaleapi.com/',
   fields: {
-      'hiring_page': 'Hiring Page URL'
+    hiring_page: 'Hiring Page URL'
   }
 })
 ```
 
 Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#errors).
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 
 scale.tasks.create({
   type: 'datacollection'
-  callback_url: "http://www.example.com/callback", 
+  callback_url: 'http://www.example.com/callback', 
   instruction: 'Find the URL for the hiring page for the company with attached website.'
   attachment: 'https://www.scaleapi.com/',
   fields: {
-      'hiring_page': 'Hiring Page URL'
+    hiring_page: 'Hiring Page URL'
   }
 })
 ```
@@ -188,7 +189,7 @@ Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. I
 
 Note: `create_annotation_task` is also aliased to `create_image_recognition_task`, to help avoid confusion.
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
@@ -244,7 +245,7 @@ Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fa
 
 Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to help avoid confusion.
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
@@ -287,7 +288,7 @@ scale.create_transcription_task({
 ```
 Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#errors).
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
@@ -327,7 +328,7 @@ scale.create_transcription_task({
 
 Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#errors).
 
-For a more idiomatic ruby experience, you can also create a task this way:
+Alternatively, you cna also create a task this way
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
