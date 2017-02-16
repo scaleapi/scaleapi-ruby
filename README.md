@@ -36,10 +36,10 @@ First, initialize the Scale API client:
 ```ruby
 require 'scale'
 
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 ```
 
-Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale API client.
+Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale API client. You can also set `default_request_params` which is a `Hash` that will be included in every request sent to Scale (either as a query string param or part of the request body).
 
 If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://dashboard.scaleapi.com). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
 
@@ -57,7 +57,7 @@ For every type of task, you can pass in the following options when creating:
 To create a [categorization task](https://docs.scaleapi.com/#create-categorization-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_categorization_task({
   callback_url: 'http://www.example.com/callback', 
@@ -73,7 +73,8 @@ Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It 
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
+
 scale.tasks.create({
   type: 'categorization',
   callback_url: 'http://www.example.com/callback', 
@@ -93,7 +94,7 @@ This will also return a `Scale::Api::Tasks::Categorization` object.
 To create a [comparison task](https://docs.scaleapi.com/#create-comparison-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_comparison_task({
   callback_url: 'http://www.example.com/callback', 
@@ -112,7 +113,7 @@ Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it f
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'comparison',
@@ -136,7 +137,7 @@ This will also return a `Scale::Api::Tasks::Comparison` object.
 To create a [datacollection task](https://docs.scaleapi.com/#create-datacollection-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback', 
@@ -154,7 +155,7 @@ Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If 
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'datacollection',
@@ -178,7 +179,7 @@ This will also return a `Scale::Api::Tasks::Datacollection` object.
 To create an [image recognition task](https://docs.scaleapi.com/#create-image-recognition-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_annotation_task({
   callback_url: 'http://www.example.com/callback',
@@ -209,7 +210,7 @@ Note: `create_annotation_task` is also aliased to `create_image_recognition_task
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'annotation',
@@ -245,7 +246,7 @@ You can use this to have real people call other people! Isn't that cool?
 To create a [phone call task](https://docs.scaleapi.com/#create-phone-call-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_phone_call_task({
   callback_url: 'http://www.example.com/callback',
@@ -266,7 +267,7 @@ Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to he
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'phonecall',
@@ -292,7 +293,7 @@ This will also return a `Scale::Api::Tasks::PhoneCall` object.
 To create a [transcription task](https://docs.scaleapi.com/#create-transcription-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_transcription_task({
   callback_url: 'http://www.example.com/callback',
@@ -310,7 +311,7 @@ Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If i
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'transcription',
@@ -335,7 +336,7 @@ This will also return a `Scale::Api::Tasks::Transcription` object.
 To create an [audio transcription task](https://docs.scaleapi.com/#create-audio-transcription-task), run the following:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.create_audiotranscription_task({
   callback_url: 'http://www.example.com/callback',
@@ -350,7 +351,7 @@ Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object.
 Alternatively, you can also create a task this way
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'audiotranscription',
@@ -371,7 +372,7 @@ To get a list of tasks, run the following command:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list
 ```
@@ -382,7 +383,7 @@ This will return a `Scale::Api::TaskList` object.
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list.map(&:id)
 ```
@@ -392,7 +393,7 @@ This will return an array containing the last 100 tasks' `task_id`.
 You can also access it like a normal array:
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list[0]
 ```
@@ -409,7 +410,7 @@ For example:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list(end_time: Time.parse('January 20th, 2017'), status: 'completed')
 ```
@@ -422,7 +423,7 @@ It also supports pagination, here's an example:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 first_page = scale.tasks.list
 second_page = first_page.next_page
@@ -440,7 +441,7 @@ To find a task by ID, run the following:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.find(task_id)
@@ -456,7 +457,7 @@ Cancel by `task_id`:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.cancel(task_id)
@@ -466,7 +467,7 @@ Cancel on the task object:
 
 ```ruby
 require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.find(task_id).cancel!
@@ -528,11 +529,14 @@ require 'scale'
 class ScaleApiController < ApplicationController
   # POST /scale_api
   def create
-    scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
+    scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'SCALE_CALLBACK_AUTH_KEY')
 
     callback = scale.build_callback params, callback_key: request.headers['scale-callback-auth']
+    return render status: 403 unless callback.verified? # Render forbidden if verifying the callback fails
+
     callback.response # Response content hash (code and result)
     callback.task     # Scale::Api::Tasks object for task type
+    
   end
 end
 ```
