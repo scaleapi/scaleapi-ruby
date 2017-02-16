@@ -39,6 +39,8 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'CALLBACK_AUTH_KEY', callback_url: 'https://example.com/please-change-me')
 ```
 
+Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale API client.
+
 If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://dashboard.scaleapi.com). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
 
 ## Creating Tasks
@@ -530,7 +532,7 @@ class ScaleApiController < ApplicationController
 
     callback = scale.build_callback params, callback_key: request.headers['scale-callback-auth']
     callback.response # Response content hash (code and result)
-    callback.task     # Scale::Resources::Task object
+    callback.task     # Scale::Api::Tasks object for task type
   end
 end
 ```
