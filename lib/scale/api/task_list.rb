@@ -15,19 +15,19 @@ class Scale
       def_delegators :@docs, :each, :<<, :[], :[]=, :length, :count
       attr_accessor :client, :docs, :limit, :offset, :has_more, :params
       TASK_TYPES_TO_CLASSNAMES = {
-        'audiotranscription': ::Scale::Api::Tasks::AudioTranscription,
-        'categorization': ::Scale::Api::Tasks::Categorization,
-        'comparison': ::Scale::Api::Tasks::Comparison,
-        'datacollection': ::Scale::Api::Tasks::Datacollection,
-        'annotation': ::Scale::Api::Tasks::ImageRecognition,
-        'phonecall': ::Scale::Api::Tasks::PhoneCall,
-        'transcription': ::Scale::Api::Tasks::Transcription
+        'audiotranscription' => ::Scale::Api::Tasks::AudioTranscription,
+        'categorization' => ::Scale::Api::Tasks::Categorization,
+        'comparison' => ::Scale::Api::Tasks::Comparison,
+        'datacollection' => ::Scale::Api::Tasks::Datacollection,
+        'annotation' => ::Scale::Api::Tasks::ImageRecognition,
+        'phonecall' => ::Scale::Api::Tasks::PhoneCall,
+        'transcription' => ::Scale::Api::Tasks::Transcription
       }.freeze
 
       def initialize(client: nil, docs: [], limit: 99, offset: 0, has_more: false, params: {})
         self.client = client
         self.docs = docs.map do |doc|
-          ::Scale::Api::Tasks::BaseTask.from_hash(doc.merge('client': client))
+          ::Scale::Api::Tasks::BaseTask.from_hash(doc.merge('client' => client))
         end
 
         self.limit = limit

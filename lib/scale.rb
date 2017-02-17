@@ -1,5 +1,4 @@
 class Scale
-  VERSION = "0.1.0"
   attr_accessor :api_key, :callback_auth_key, :default_request_params, :logging
 
   def self.validate_api_key(api_key)

@@ -10,7 +10,7 @@ class Scale
 
         if params['task']
           @task_id = params['task']['id']
-          @task = Scale::Api::Tasks::BaseTask.from_hash(params['task'].merge('client': client))
+          @task = Scale::Api::Tasks::BaseTask.from_hash(params['task'].merge('client' => client))
         end
       end
 
