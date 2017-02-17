@@ -6,8 +6,8 @@ require 'scale'
 Gem::Specification.new do |spec|
   spec.name          = "scaleapi"
   spec.version       = Scale::VERSION
-  spec.authors       = ["Jarred Sumner"]
-  spec.email         = ["jarred@jarredsumner.com"]
+  spec.authors       = ["Alexandr Wang"]
+  spec.email         = ["alex@scaleapi.com"]
 
   spec.summary       = %q{Official Ruby Client for Scale API}
   spec.description   = %q{Scale is an API For Human Intelligence. Get high quality results for all sorts of tasks within minutes. This is the official Ruby client.}
