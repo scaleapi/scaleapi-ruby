@@ -25,9 +25,7 @@ class Scale
             instance_variable_set "@#{attr}", json[attr]
           end
 
-          if json[:client]
-            @client = json[:client]
-          end
+          @client = (json[:client] || json['client'])
 
           tweak_attributes
         end
