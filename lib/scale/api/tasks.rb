@@ -36,7 +36,7 @@ class Scale
 
       def create(args = {})
         raise ArgumentError.new('Task type is required') if (args[:type].nil? && args['type'].nil?)
-        klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(args[:type] || args['type']).to_sym]
+        klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(args[:type] || args['type']).to_s]
         
         unless klass
           raise ArgumentError.new('Unsupported task type. Supported task types: ' + ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES.keys.join(','))
