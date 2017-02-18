@@ -567,7 +567,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/scalea
 
 Currently, this repository has no tests - and adding tests using RSpec would make a for a great PR :)
 
+Thanks to [wikiti](https://github.com/wikiti/) for creating the first unofficial Scale API Ruby Client!
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
