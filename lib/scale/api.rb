@@ -20,7 +20,7 @@ class Scale
         req.url "#{SCALE_API_URL}#{url}"
         req.params.merge!(default_request_params.merge(params))
         req.headers['X-API-Client'] = "Ruby"
-        req.headers["X-API-Client-Version"] = Scale::VERSION
+        req.headers["X-API-Client-Version"] = '0.1.0'
       end
 
       if response.status != 200
@@ -41,7 +41,7 @@ class Scale
         req.headers['Content-Type'] = 'application/json'
         req.body = body.to_json
         req.headers['X-API-Client'] = "Ruby"
-        req.headers["X-API-Client-Version"] = Scale::VERSION
+        req.headers["X-API-Client-Version"] = '0.1.0'
       end
 
       if response.status != 200
