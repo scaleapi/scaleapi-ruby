@@ -11,7 +11,7 @@ class Scale
         alias_method :id, :task_id
 
         def self.from_hash(hash)
-          klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[hash['type'].to_sym] || self
+          klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(hash[:type] || hash['type']).to_s] || self
           klass.new(hash)
         end
 
