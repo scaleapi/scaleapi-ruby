@@ -4,6 +4,8 @@ require 'scale/api/tasks/datacollection'
 require 'scale/api/tasks/categorization'
 require 'scale/api/tasks/comparison'
 require 'scale/api/tasks/image_recognition'
+require 'scale/api/tasks/polygonannotation'
+require 'scale/api/tasks/lineannotation'
 require 'scale/api/tasks/phone_call'
 require 'scale/api/tasks/transcription'
 
@@ -20,6 +22,8 @@ class Scale
         'comparison' => ::Scale::Api::Tasks::Comparison,
         'datacollection' => ::Scale::Api::Tasks::Datacollection,
         'annotation' => ::Scale::Api::Tasks::ImageRecognition,
+        'polygonannotation' => ::Scale::Api::Tasks::Polygonannotation,
+        'lineannotation' => ::Scale::Api::Tasks::Lineannotation,
         'phonecall' => ::Scale::Api::Tasks::PhoneCall,
         'transcription' => ::Scale::Api::Tasks::Transcription
       }.freeze
