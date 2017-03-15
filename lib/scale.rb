@@ -48,6 +48,14 @@ class Scale
     Api::Tasks::ImageRecognition.create(args.merge(client: client))
   end
 
+  def create_polygonannotation_task(args = {})
+    Api::Tasks::Polygonannotation.create(args.merge(client: client))
+  end
+
+  def create_lineannotation_task(args = {})
+    Api::Tasks::Lineannotation.create(args.merge(client: client))
+  end
+
   def create_phone_call_task(args = {})
     Api::Tasks::PhoneCall.create(args.merge(client: client))
   end
@@ -89,6 +97,8 @@ require 'scale/api/tasks/datacollection'
 require 'scale/api/tasks/categorization'
 require 'scale/api/tasks/comparison'
 require 'scale/api/tasks/image_recognition'
+require 'scale/api/tasks/polygonannotation'
+require 'scale/api/tasks/lineannotation'
 require 'scale/api/tasks/phone_call'
 require 'scale/api/tasks/transcription'
 require 'scale/api/task_list'
