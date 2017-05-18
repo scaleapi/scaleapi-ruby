@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "scaleapi"
-  spec.version       = "0.2.0"
+  spec.version       = "0.3.0"
   spec.authors       = ["Alexandr Wang"]
   spec.email         = ["alex@scaleapi.com"]
 
@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_dependency "faraday", "0.11.0"
+  spec.add_dependency "faraday", "~> 0.11.0"
 end
