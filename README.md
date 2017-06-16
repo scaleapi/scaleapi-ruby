@@ -1,7 +1,7 @@
 # Scale API
 ![Scale API Logo](https://www.scaleapi.com/static/global/facebook-card.png)
 
-This is the official Scale API RubyGem (`scaleapi`).
+This is the official Scale API RubyGem (`scale_api`).
 
 [Scale](https://www.scaleapi.com) is an API for Human Intelligence. Businesses like Alphabet (Google), Uber, Proctor & Gamble, Houzz, and many more use us to power tasks such as:
 - Draw bounding boxes and label parts of images (to train ML algorithms for self-driving cars)
@@ -18,7 +18,7 @@ Scale is actively hiring software engineers - [apply here](https://www.scaleapi.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'scaleapi'
+gem 'scale_api'
 ```
 
 And then execute:
@@ -27,16 +27,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install scaleapi
+    $ gem install scale_api
 
 ## Usage
 
 First, initialize the Scale API client:
 
 ```ruby
-require 'scale'
+require 'scale_api'
 
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 ```
 
 Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale API client. You can also set `default_request_params` which is a `Hash` that will be included in every request sent to Scale (either as a query string param or part of the request body).
@@ -56,8 +56,8 @@ For every type of task, you can pass in the following options when creating:
 
 To create a [categorization task](https://docs.scaleapi.com/#create-categorization-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_categorization_task({
   callback_url: 'http://www.example.com/callback', 
@@ -68,12 +68,12 @@ scale.create_categorization_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Categorization` object. It will raise one of the [errors](#user-content-errors) if it's not successful.
+Upon success, this will return a `ScaleApi::Api::Tasks::Categorization` object. It will raise one of the [errors](#user-content-errors) if it's not successful.
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'categorization',
@@ -85,7 +85,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::Categorization` object.
+This will also return a `ScaleApi::Api::Tasks::Categorization` object.
 
 [Read more about creating categorization tasks](https://docs.scaleapi.com/#create-categorization-task)
 
@@ -93,8 +93,8 @@ This will also return a `Scale::Api::Tasks::Categorization` object.
 
 To create a [comparison task](https://docs.scaleapi.com/#create-comparison-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_comparison_task({
   callback_url: 'http://www.example.com/callback', 
@@ -108,12 +108,12 @@ scale.create_comparison_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#user-content-errors).
+Upon success, this will return a `ScaleApi::Api::Tasks::Comparison` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'comparison',
@@ -128,7 +128,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::Comparison` object.
+This will also return a `ScaleApi::Api::Tasks::Comparison` object.
 
 [Read more about creating comparison tasks](https://docs.scaleapi.com/#create-comparison-task)
 
@@ -136,8 +136,8 @@ This will also return a `Scale::Api::Tasks::Comparison` object.
 
 To create a [datacollection task](https://docs.scaleapi.com/#create-datacollection-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback', 
@@ -150,12 +150,12 @@ scale.create_datacollection_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#user-content-errors).
+Upon success, this will return a `ScaleApi::Api::Tasks::Datacollection` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'datacollection',
@@ -169,7 +169,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::Datacollection` object.
+This will also return a `ScaleApi::Api::Tasks::Datacollection` object.
 
 [Read more about creating datacollection tasks](https://docs.scaleapi.com/#create-data-collection-task)
 
@@ -178,8 +178,8 @@ This will also return a `Scale::Api::Tasks::Datacollection` object.
 
 To create an [image recognition task](https://docs.scaleapi.com/#create-image-recognition-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_annotation_task({
   callback_url: 'http://www.example.com/callback',
@@ -202,15 +202,15 @@ scale.create_annotation_task({
   ]
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](
+Upon success, this will return a `ScaleApi::Api::Tasks::ImageRecognition` object. If it fails, it will raise one of the [errors](
 ).
 
 Note: `create_annotation_task` is also aliased to `create_image_recognition_task`, to help avoid confusion.
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'annotation',
@@ -235,7 +235,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::ImageRecognition` object.
+This will also return a `ScaleApi::Api::Tasks::ImageRecognition` object.
 
 [Read more about creating image recognition tasks](https://docs.scaleapi.com/#create-image-recognition-task)
 
@@ -245,8 +245,8 @@ You can use this to have real people call other people! Isn't that cool?
 
 To create a [phone call task](https://docs.scaleapi.com/#create-phone-call-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_phone_call_task({
   callback_url: 'http://www.example.com/callback',
@@ -260,14 +260,14 @@ scale.create_phone_call_task({
   choices: ['He is happy', 'He is not happy']
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fails, it will raise one of the [errors](#user-content-errors).
+Upon success, this will return a `ScaleApi::Api::Tasks::PhoneCall` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to help avoid confusion.
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'phonecall',
@@ -283,7 +283,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::PhoneCall` object.
+This will also return a `ScaleApi::Api::Tasks::PhoneCall` object.
 
 [Read more about creating phone call tasks](https://docs.scaleapi.com/#create-phone-call-task)
 
@@ -292,8 +292,8 @@ This will also return a `Scale::Api::Tasks::PhoneCall` object.
 
 To create a [transcription task](https://docs.scaleapi.com/#create-transcription-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_transcription_task({
   callback_url: 'http://www.example.com/callback',
@@ -306,12 +306,12 @@ scale.create_transcription_task({
   }
 })
 ```
-Upon success, this will return a `Scale::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#user-content-errors).
+Upon success, this will return a `ScaleApi::Api::Tasks::Transcription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'transcription',
@@ -326,7 +326,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::Transcription` object.
+This will also return a `ScaleApi::Api::Tasks::Transcription` object.
 
 [Read more about creating transcription tasks](https://docs.scaleapi.com/#create-transcription-task)
 
@@ -335,8 +335,8 @@ This will also return a `Scale::Api::Tasks::Transcription` object.
 
 To create an [audio transcription task](https://docs.scaleapi.com/#create-audio-transcription-task), run the following:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.create_audiotranscription_task({
   callback_url: 'http://www.example.com/callback',
@@ -346,12 +346,12 @@ scale.create_audiotranscription_task({
 })
 ```
 
-Upon success, this will return a `Scale::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#user-content-errors).
+Upon success, this will return a `ScaleApi::Api::Tasks::AudioTranscription` object. If it fails, it will raise one of the [errors](#user-content-errors).
 
 Alternatively, you can also create a task this way
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.create({
   type: 'audiotranscription',
@@ -362,7 +362,7 @@ scale.tasks.create({
 })
 ```
 
-This will also return a `Scale::Api::Tasks::AudioTranscription` object.
+This will also return a `ScaleApi::Api::Tasks::AudioTranscription` object.
 
 [Read more about creating audio transcription tasks](https://docs.scaleapi.com/#create-audio-transcription-task)
 
@@ -371,19 +371,19 @@ This will also return a `Scale::Api::Tasks::AudioTranscription` object.
 To get a list of tasks, run the following command:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list
 ```
 
-This will return a `Scale::Api::TaskList` object.
+This will return a `ScaleApi::Api::TaskList` object.
 
-`Scale::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
+`ScaleApi::Api::TaskList` implements `Enumerable`, meaning you can do fun stuff like this:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list.map(&:id)
 ```
@@ -392,8 +392,8 @@ This will return an array containing the last 100 tasks' `task_id`.
 
 You can also access it like a normal array:
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list[0]
 ```
@@ -409,27 +409,27 @@ You can filter this list by:
 For example:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 scale.tasks.list(end_time: Time.parse('January 20th, 2017'), status: 'completed')
 ```
 
-This will return a `Scale::Api::TaskList` object up to 100 tasks that were completed by January 20th, 2017.
+This will return a `ScaleApi::Api::TaskList` object up to 100 tasks that were completed by January 20th, 2017.
 
 By default, `scale.tasks.list` only returns up to 100 tasks, but you can pass in the `limit` yourself.
 
 It also supports pagination, here's an example:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 first_page = scale.tasks.list
 second_page = first_page.next_page
 ```
 
-`Scale::Api::TaskList#next_page` returns the next page in the list of tasks (as a new `Scale::Api::TaskList`). You can see if there are more pages by calling `Scale::Api::TaskList#has_more?` on the object.
+`ScaleApi::Api::TaskList#next_page` returns the next page in the list of tasks (as a new `ScaleApi::Api::TaskList`). You can see if there are more pages by calling `ScaleApi::Api::TaskList#has_more?` on the object.
 
 `scale.tasks.list` is aliased to `scale.tasks.where` and `scale.tasks.all`.
 
@@ -440,8 +440,8 @@ For more information, [read our documentation](https://docs.scaleapi.com/#list-a
 To find a task by ID, run the following:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.find(task_id)
@@ -456,8 +456,8 @@ There are two ways to cancel a task.
 Cancel by `task_id`:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.cancel(task_id)
@@ -466,8 +466,8 @@ scale.tasks.cancel(task_id)
 Cancel on the task object:
 
 ```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
+require 'scale_api'
+scale = ScaleApi.new(api_key: 'SCALE_API_KEY')
 
 task_id = 'TASK_ID'
 scale.tasks.find(task_id).cancel!
@@ -478,13 +478,13 @@ Both ways will return a new [task object](#user-content-task-object) for the typ
 ## Task Object
 
 All tasks return a task object for their `type`. Currently, this gem supports the following task types:
-- `categorization` (`Scale::Api::Tasks::Categorization`)
-- `comparison` (`Scale::Api::Tasks::Comparison`)
-- `datacollection` (`Scale::Api::Tasks::Datacollection`)
-- `annotation` (`Scale::Api::Tasks::ImageRecognition`)
-- `phonecall` (`Scale::Api::Tasks::PhoneCall`)
-- `transcription` (`Scale::Api::Tasks::Transcription`)
-- `audiotranscription` (`Scale::Api::Tasks::AudioTranscription`)
+- `categorization` (`ScaleApi::Api::Tasks::Categorization`)
+- `comparison` (`ScaleApi::Api::Tasks::Comparison`)
+- `datacollection` (`ScaleApi::Api::Tasks::Datacollection`)
+- `annotation` (`ScaleApi::Api::Tasks::ImageRecognition`)
+- `phonecall` (`ScaleApi::Api::Tasks::PhoneCall`)
+- `transcription` (`ScaleApi::Api::Tasks::Transcription`)
+- `audiotranscription` (`ScaleApi::Api::Tasks::AudioTranscription`)
 
 At the time of writing, this is every task type that Scale supports.
 
@@ -524,18 +524,18 @@ For example, for Ruby on Rails:
 ```ruby
 # app/controllers/scale_api_controller.rb
 
-require 'scale'
+require 'scale_api'
 
 class ScaleApiController < ApplicationController
   # POST /scale_api
   def create
-    scale = Scale.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'SCALE_CALLBACK_AUTH_KEY')
+    scale = ScaleApi.new(api_key: 'SCALE_API_KEY', callback_auth_key: 'SCALE_CALLBACK_AUTH_KEY')
 
     callback = scale.build_callback params, callback_key: request.headers['scale-callback-auth']
     return render status: 403 unless callback.verified? # Render forbidden if verifying the callback fails
 
     callback.response # Response content hash (code and result)
-    callback.task     # Scale::Api::Tasks object for task type
+    callback.task     # ScaleApi::Api::Tasks object for task type
     
   end
 end
@@ -546,13 +546,13 @@ end
 This gem will raise exceptions on application-level errors. Here are the list of errors:
 
 ```ruby
-Scale::Api::BadRequest
-Scale::Api::TooManyRequests
-Scale::Api::NotFound
-Scale::Api::Unauthorized
-Scale::Api::InternalServerError
-Scale::Api::ConnectionError
-Scale::Api::APIKeyInvalid
+ScaleApi::Api::BadRequest
+ScaleApi::Api::TooManyRequests
+ScaleApi::Api::NotFound
+ScaleApi::Api::Unauthorized
+ScaleApi::Api::InternalServerError
+ScaleApi::Api::ConnectionError
+ScaleApi::Api::APIKeyInvalid
 ```
 
 ## Development

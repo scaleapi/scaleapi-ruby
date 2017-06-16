@@ -3,8 +3,8 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "scaleapi"
-  spec.version       = "0.3.0"
+  spec.name          = "scale_api"
+  spec.version       = "0.4.0"
   spec.authors       = ["Alexandr Wang"]
   spec.email         = ["alex@scaleapi.com"]
 

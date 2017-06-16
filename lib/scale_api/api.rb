@@ -2,7 +2,7 @@ require 'uri'
 require 'faraday'
 require 'json'
 
-class Scale
+class ScaleApi
   class Api < Struct.new(:api_key, :callback_auth_key, :default_request_params, :logging)
     SCALE_API_URL = 'https://api.scaleapi.com/v1/'
 
@@ -29,7 +29,7 @@ class Scale
 
       response
     rescue Faraday::Error::ConnectionFailed
-      raise Scale::Api::ConnectionError
+      raise ScaleApi::Api::ConnectionError
     end
 
     def post(url, body = {})
@@ -50,26 +50,26 @@ class Scale
 
       response
     rescue Faraday::Error::ConnectionFailed
-      raise Scale::Api::ConnectionError
+      raise ScaleApi::Api::ConnectionError
     end
 
     def handle_error(response)
       error_body = JSON.parse(response.body)
       if response.status == 404
-        raise Scale::Api::NotFound.new(error_body['error'], response.status)
+        raise ScaleApi::Api::NotFound.new(error_body['error'], response.status)
       elsif response.status == 429
-        raise Scale::Api::TooManyRequests.new(error_body['error'], response.status)
+        raise ScaleApi::Api::TooManyRequests.new(error_body['error'], response.status)
       elsif response.status > 499
-        raise Scale::Api::InternalServerError.new(error_body['error'], response.status)
+        raise ScaleApi::Api::InternalServerError.new(error_body['error'], response.status)
       elsif response.status == 401
-        raise Scale::Api::Unauthorized.new(error_body['error'], response.status)
+        raise ScaleApi::Api::Unauthorized.new(error_body['error'], response.status)
       else
-        raise Scale::Api::BadRequest.new(error_body['error'], response.status)
+        raise ScaleApi::Api::BadRequest.new(error_body['error'], response.status)
       end
     rescue JSON::ParserError
-      raise Scale::Api::InternalServerError
+      raise ScaleApi::Api::InternalServerError
     end
   end
 end
 
-require 'scale/api/errors'
+require 'scale_api/api/errors'

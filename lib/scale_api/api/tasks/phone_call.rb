@@ -1,10 +1,10 @@
 require 'json'
-require 'scale/api/tasks/base_task'
+require 'scale_api/api/tasks/base_task'
 
-class Scale
+class ScaleApi
   class Api
     class Tasks
-      class PhoneCall < Scale::Api::Tasks::BaseTask
+      class PhoneCall < ScaleApi::Api::Tasks::BaseTask
         CREATE_PATH = 'task/phonecall'.freeze
 
         def self.create(callback_url: nil, instruction: nil, phone_number: nil, script: nil, entity_name: nil, attachment: nil, attachment_type: nil, fields: {}, choices: {}, urgency: 'day', metadata: {}, client: nil)

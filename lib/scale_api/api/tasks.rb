@@ -1,4 +1,4 @@
-class Scale
+class ScaleApi
   class Api
     class Tasks < Struct.new(:client)
       def list(start_time: nil, end_time: nil, limit: 99, offset: 0, type: nil, status: nil)
@@ -36,10 +36,10 @@ class Scale
 
       def create(args = {})
         raise ArgumentError.new('Task type is required') if (args[:type].nil? && args['type'].nil?)
-        klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(args[:type] || args['type']).to_s]
+        klass = ::ScaleApi::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(args[:type] || args['type']).to_s]
         
         unless klass
-          raise ArgumentError.new('Unsupported task type. Supported task types: ' + ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES.keys.join(','))
+          raise ArgumentError.new('Unsupported task type. Supported task types: ' + ::ScaleApi::Api::TaskList::TASK_TYPES_TO_CLASSNAMES.keys.join(','))
         end
 
         args.delete(:type)
@@ -52,4 +52,4 @@ class Scale
   end
 end
 
-require 'scale/api/task_list'
+require 'scale_api/api/task_list'

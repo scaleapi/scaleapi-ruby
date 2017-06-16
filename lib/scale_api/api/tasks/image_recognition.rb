@@ -1,10 +1,10 @@
 require 'json'
-require 'scale/api/tasks/base_task'
+require 'scale_api/api/tasks/base_task'
 
-class Scale
+class ScaleApi
   class Api
     class Tasks
-      class ImageRecognition < Scale::Api::Tasks::BaseTask
+      class ImageRecognition < ScaleApi::Api::Tasks::BaseTask
         CREATE_PATH = 'task/annotation'.freeze
 
         def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, objects_to_annotate: [], with_labels: false, min_width: nil, min_height: nil, examples: [], urgency: 'day', metadata: {}, client: nil)

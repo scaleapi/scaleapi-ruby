@@ -1,7 +1,7 @@
 require 'json'
-require 'scale/api/tasks/base_task'
+require 'scale_api/api/tasks/base_task'
 
-class Scale
+class ScaleApi
   class Api
     class Tasks
       class Categorization < BaseTask

@@ -1,6 +1,6 @@
 require 'time'
 
-class Scale
+class ScaleApi
   class Api
     class Tasks
       class BaseTask
@@ -11,7 +11,7 @@ class Scale
         alias_method :id, :task_id
 
         def self.from_hash(hash)
-          klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(hash[:type] || hash['type']).to_s] || self
+          klass = ::ScaleApi::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(hash[:type] || hash['type']).to_s] || self
           klass.new(hash)
         end
 
