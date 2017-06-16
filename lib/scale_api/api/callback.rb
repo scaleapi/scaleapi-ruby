@@ -1,4 +1,4 @@
-class Scale
+class ScaleApi
   class Api
     class Callback
       attr_reader :client, :response, :task, :task_id, :request_callback_key
@@ -10,7 +10,7 @@ class Scale
 
         if params['task']
           @task_id = params['task']['id']
-          @task = Scale::Api::Tasks::BaseTask.from_hash(params['task'].merge('client' => client))
+          @task = ScaleApi::Api::Tasks::BaseTask.from_hash(params['task'].merge('client' => client))
         end
       end
 
@@ -25,5 +25,5 @@ class Scale
   end
 end
 
-require 'scale/api/tasks'
-require 'scale/api/tasks/base_task'
+require 'scale_api/api/tasks'
+require 'scale_api/api/tasks/base_task'

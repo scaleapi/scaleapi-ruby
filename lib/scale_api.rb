@@ -1,4 +1,4 @@
-class Scale
+class ScaleApi
   attr_accessor :api_key, :callback_auth_key, :default_request_params, :logging
 
   def self.validate_api_key(api_key)
@@ -8,7 +8,7 @@ class Scale
   end
 
   def initialize(api_key: nil, callback_auth_key: nil, default_request_params: {}, logging: false, callback_url: nil)
-    Scale.validate_api_key(api_key)
+    ScaleApi.validate_api_key(api_key)
 
     self.api_key = api_key
     self.callback_auth_key = callback_auth_key
@@ -29,7 +29,7 @@ class Scale
   end
 
   def tasks
-    @tasks ||= Scale::Api::Tasks.new(client)
+    @tasks ||= ScaleApi::Api::Tasks.new(client)
   end
 
   def create_datacollection_task(args = {})
@@ -87,18 +87,18 @@ class Scale
   alias_method :create_audiotranscription_task, :create_audio_transcription_task
 end
 
-require 'scale/api'
-require 'scale/api/errors'
-require 'scale/api/callback'
-require 'scale/api/tasks'
-require 'scale/api/tasks/audio_transcription'
-require 'scale/api/tasks/base_task'
-require 'scale/api/tasks/datacollection'
-require 'scale/api/tasks/categorization'
-require 'scale/api/tasks/comparison'
-require 'scale/api/tasks/image_recognition'
-require 'scale/api/tasks/polygonannotation'
-require 'scale/api/tasks/lineannotation'
-require 'scale/api/tasks/phone_call'
-require 'scale/api/tasks/transcription'
-require 'scale/api/task_list'
+require 'scale_api/api'
+require 'scale_api/api/errors'
+require 'scale_api/api/callback'
+require 'scale_api/api/tasks'
+require 'scale_api/api/tasks/audio_transcription'
+require 'scale_api/api/tasks/base_task'
+require 'scale_api/api/tasks/datacollection'
+require 'scale_api/api/tasks/categorization'
+require 'scale_api/api/tasks/comparison'
+require 'scale_api/api/tasks/image_recognition'
+require 'scale_api/api/tasks/polygonannotation'
+require 'scale_api/api/tasks/lineannotation'
+require 'scale_api/api/tasks/phone_call'
+require 'scale_api/api/tasks/transcription'
+require 'scale_api/api/task_list'

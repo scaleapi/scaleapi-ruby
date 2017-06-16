@@ -1,4 +1,4 @@
-class Scale
+class ScaleApi
   class Api
     class Error < StandardError
       attr_accessor :status_code

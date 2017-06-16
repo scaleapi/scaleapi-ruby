@@ -1,4 +1,6 @@
 /.bundle/
+/.idea/
+/.ruby-version
 /.yardoc
 /Gemfile.lock
 /_yardoc/
