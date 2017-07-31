@@ -7,7 +7,7 @@ class Scale
       class Categorization < BaseTask
         CREATE_PATH = 'task/categorize'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: nil, categories: [], urgency: 'day', category_ids: {}, allow_multiple: false, metadata: {}, client: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: nil, categories: [], layers: nil, urgency: 'day', category_ids: {}, allow_multiple: false, metadata: {}, client: nil)
           body = {
             callback_url: callback_url,
             instruction: instruction,
@@ -17,7 +17,8 @@ class Scale
             urgency: urgency,
             category_ids: category_ids,
             allow_multiple: allow_multiple,
-            metadata: metadata
+            metadata: metadata,
+            layers: layers
           }
 
           body.delete(:category_ids) if category_ids.keys.count.zero?
