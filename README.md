@@ -5,7 +5,6 @@ This is the official Scale API RubyGem (`scaleapi`).
 
 [Scale](https://www.scaleapi.com) is an API for Human Intelligence. Businesses like Alphabet (Google), Uber, Proctor & Gamble, Houzz, and many more use us to power tasks such as:
 - Draw bounding boxes and label parts of images (to train ML algorithms for self-driving cars)
-- Place phone calls
 - Transcribe documents, images, and webpages
 - Scrape websites
 - Triage support tickets
@@ -239,55 +238,6 @@ This will also return a `Scale::Api::Tasks::ImageRecognition` object.
 
 [Read more about creating image recognition tasks](https://docs.scaleapi.com/#create-image-recognition-task)
 
-### Phone Call Tasks
-
-You can use this to have real people call other people! Isn't that cool?
-
-To create a [phone call task](https://docs.scaleapi.com/#create-phone-call-task), run the following:
-```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
-
-scale.create_phone_call_task({
-  callback_url: 'http://www.example.com/callback',
-  instruction: 'Call this person and follow the script provided, recording responses',
-  phone_number: '5055006865',
-  entity_name: 'Alexandr Wang',
-  script: 'Hello ! Are you happy today? (pause) One more thing - what is your email address?',
-  fields: {
-    email: 'Email Address',
-  },
-  choices: ['He is happy', 'He is not happy']
-})
-```
-Upon success, this will return a `Scale::Api::Tasks::PhoneCall` object. If it fails, it will raise one of the [errors](#user-content-errors).
-
-Note: `create_phone_call_task` is also aliased to `create_phonecall_task`, to help avoid confusion.
-
-Alternatively, you can also create a task this way
-```ruby
-require 'scale'
-scale = Scale.new(api_key: 'SCALE_API_KEY')
-
-scale.tasks.create({
-  type: 'phonecall',
-  callback_url: 'http://www.example.com/callback',
-  instruction: 'Call this person and follow the script provided, recording responses',
-  phone_number: '5055006865',
-  entity_name: 'Alexandr Wang',
-  script: 'Hello ! Are you happy today? (pause) One more thing - what is your email address?',
-  fields: {
-    email: 'Email Address',
-  },
-  choices: ['He is happy', 'He is not happy']
-})
-```
-
-This will also return a `Scale::Api::Tasks::PhoneCall` object.
-
-[Read more about creating phone call tasks](https://docs.scaleapi.com/#create-phone-call-task)
-
-
 ### Transcription Tasks
 
 To create a [transcription task](https://docs.scaleapi.com/#create-transcription-task), run the following:
@@ -482,7 +432,6 @@ All tasks return a task object for their `type`. Currently, this gem supports th
 - `comparison` (`Scale::Api::Tasks::Comparison`)
 - `datacollection` (`Scale::Api::Tasks::Datacollection`)
 - `annotation` (`Scale::Api::Tasks::ImageRecognition`)
-- `phonecall` (`Scale::Api::Tasks::PhoneCall`)
 - `transcription` (`Scale::Api::Tasks::Transcription`)
 - `audiotranscription` (`Scale::Api::Tasks::AudioTranscription`)
 
