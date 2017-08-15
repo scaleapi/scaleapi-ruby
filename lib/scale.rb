@@ -68,6 +68,14 @@ class Scale
     Api::Tasks::AudioTranscription.create(args.merge(client: client))
   end
 
+  def create_pointannotation_task(args = {})
+    Api::Tasks::Pointannotation.create(args.merge(client: client))
+  end
+
+  def create_segmentannotation_task(args = {})
+    Api::Tasks::Segmentannotation.create(args.merge(client: client))
+  end
+
   def build_callback(params, callback_key: nil)
     callback = Api::Callback.new(params, callback_key: callback_key, client: client)
     
@@ -101,4 +109,6 @@ require 'scale/api/tasks/polygonannotation'
 require 'scale/api/tasks/lineannotation'
 require 'scale/api/tasks/phone_call'
 require 'scale/api/tasks/transcription'
+require 'scale/api/tasks/pointannotation'
+require 'scale/api/tasks/segmentannotaiton'
 require 'scale/api/task_list'

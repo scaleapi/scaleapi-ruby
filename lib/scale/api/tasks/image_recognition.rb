@@ -7,7 +7,7 @@ class Scale
       class ImageRecognition < Scale::Api::Tasks::BaseTask
         CREATE_PATH = 'task/annotation'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, objects_to_annotate: [], with_labels: false, min_width: nil, min_height: nil, layers: nil, examples: [], urgency: 'day', metadata: {}, client: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, objects_to_annotate: [], with_labels: false, min_width: nil, min_height: nil, layers: nil, examples: [], urgency: 'day', metadata: {}, annotation_attributes: nil, client: nil)
           response = client.post(CREATE_PATH, {
             callback_url: callback_url,
             instruction: instruction,
@@ -20,7 +20,8 @@ class Scale
             examples: examples,
             urgency: urgency,
             metadata: metadata,
-            layers: layers
+            layers: layers,
+            annotation_attributes: annotation_attributes
           })
 
           ImageRecognition.new(JSON.parse(response.body))
