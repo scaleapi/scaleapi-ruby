@@ -8,6 +8,8 @@ require 'scale/api/tasks/polygonannotation'
 require 'scale/api/tasks/lineannotation'
 require 'scale/api/tasks/phone_call'
 require 'scale/api/tasks/transcription'
+require 'scale/api/tasks/segmentannotation'
+require 'scale/api/tasks/pointannotation'
 
 class Scale
   class Api
@@ -25,7 +27,9 @@ class Scale
         'polygonannotation' => ::Scale::Api::Tasks::Polygonannotation,
         'lineannotation' => ::Scale::Api::Tasks::Lineannotation,
         'phonecall' => ::Scale::Api::Tasks::PhoneCall,
-        'transcription' => ::Scale::Api::Tasks::Transcription
+        'transcription' => ::Scale::Api::Tasks::Transcription,
+        'pointannotation' => ::Scale::Api::Tasks::Pointannotation,
+        'segmentannotation' => ::Scale::Api::Tasks::Segmentannotation
       }.freeze
 
       def initialize(client: nil, docs: [], limit: 99, offset: 0, has_more: false, params: {})
