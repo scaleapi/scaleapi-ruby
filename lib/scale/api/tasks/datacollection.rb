@@ -7,7 +7,7 @@ class Scale
       class Datacollection < BaseTask
         CREATE_PATH = 'task/datacollection'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, fields: {}, urgency: 'day', metadata: {}, client: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: nil, fields: {}, urgency: 'day', metadata: {}, client: nil)
           response = client.post(CREATE_PATH, {
             callback_url: callback_url,
             instruction: instruction,
