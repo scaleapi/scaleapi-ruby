@@ -7,7 +7,7 @@ class Scale
       class Segmentannotation < Scale::Api::Tasks::BaseTask
         CREATE_PATH = 'task/segmentannotation'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, labels: [], allow_unlabeled: false, layers: nil, examples: [], urgency: 'day', metadata: {}, client: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: nil, labels: [], allow_unlabeled: false, layers: nil, examples: [], urgency: 'day', metadata: {}, client: nil)
           response = client.post(CREATE_PATH, {
             callback_url: callback_url,
             instruction: instruction,

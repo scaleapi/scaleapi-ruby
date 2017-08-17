@@ -7,7 +7,7 @@ class Scale
       class Lineannotation < Scale::Api::Tasks::BaseTask
         CREATE_PATH = 'task/lineannotation'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: null, objects_to_annotate: [], with_labels: false, layers: nil, examples: [], urgency: 'day', splines: false, annotation_attributes: nil, metadata: {}, client: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, attachment: nil, objects_to_annotate: [], with_labels: false, layers: nil, examples: [], urgency: 'day', splines: false, annotation_attributes: nil, metadata: {}, client: nil)
           response = client.post(CREATE_PATH, {
             callback_url: callback_url,
             instruction: instruction,

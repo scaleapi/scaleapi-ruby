@@ -7,7 +7,7 @@ class Scale
       class Transcription < BaseTask
         CREATE_PATH = 'task/transcription'.freeze
 
-        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, choices: {}, attachment: null, fields: {}, urgency: 'day', metadata: {}, client: nil, repeatable_fields: nil)
+        def self.create(callback_url: nil, instruction: nil, attachment_type: nil, choices: {}, attachment: nil, fields: {}, urgency: 'day', metadata: {}, client: nil, repeatable_fields: nil)
           args = {
             callback_url: callback_url,
             instruction: instruction,
