@@ -2,16 +2,16 @@ class Scale
   attr_accessor :api_key, :callback_auth_key, :default_request_params, :logging
 
   VALID_TASK_TYPES = [
-    "datacollection",
-    "categorization",
-    "comparison",
-    "annotation",
-    "polygonannotation",
-    "lineannotation",
-    "transcription",
-    "audiotranscription",
-    "pointannotation",
-    "segmentannotation"
+    "datacollection".freeze,
+    "categorization".freeze,
+    "comparison".freeze,
+    "annotation".freeze,
+    "polygonannotation".freeze,
+    "lineannotation".freeze,
+    "transcription".freeze,
+    "audiotranscription".freeze,
+    "pointannotation".freeze,
+    "segmentannotation".freeze
   ]
 
   def method_missing(methodId, *args, &block)
