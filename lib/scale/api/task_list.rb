@@ -1,15 +1,4 @@
 require 'scale/api/tasks/base_task'
-require 'scale/api/tasks/audio_transcription'
-require 'scale/api/tasks/datacollection'
-require 'scale/api/tasks/categorization'
-require 'scale/api/tasks/comparison'
-require 'scale/api/tasks/image_recognition'
-require 'scale/api/tasks/polygonannotation'
-require 'scale/api/tasks/lineannotation'
-require 'scale/api/tasks/phone_call'
-require 'scale/api/tasks/transcription'
-require 'scale/api/tasks/segmentannotation'
-require 'scale/api/tasks/pointannotation'
 
 class Scale
   class Api
@@ -19,17 +8,17 @@ class Scale
       def_delegators :@docs, :each, :<<, :[], :[]=, :length, :count
       attr_accessor :client, :docs, :limit, :offset, :has_more, :params
       TASK_TYPES_TO_CLASSNAMES = {
-        'audiotranscription' => ::Scale::Api::Tasks::AudioTranscription,
-        'categorization' => ::Scale::Api::Tasks::Categorization,
-        'comparison' => ::Scale::Api::Tasks::Comparison,
-        'datacollection' => ::Scale::Api::Tasks::Datacollection,
-        'annotation' => ::Scale::Api::Tasks::ImageRecognition,
-        'polygonannotation' => ::Scale::Api::Tasks::Polygonannotation,
-        'lineannotation' => ::Scale::Api::Tasks::Lineannotation,
-        'phonecall' => ::Scale::Api::Tasks::PhoneCall,
-        'transcription' => ::Scale::Api::Tasks::Transcription,
-        'pointannotation' => ::Scale::Api::Tasks::Pointannotation,
-        'segmentannotation' => ::Scale::Api::Tasks::Segmentannotation
+        'audiotranscription' => ::Scale::Api::Tasks::BaseTask,
+        'categorization' => ::Scale::Api::Tasks::BaseTask,
+        'comparison' => ::Scale::Api::Tasks::BaseTask,
+        'datacollection' => ::Scale::Api::Tasks::BaseTask,
+        'annotation' => ::Scale::Api::Tasks::BaseTask,
+        'polygonannotation' => ::Scale::Api::Tasks::BaseTask,
+        'lineannotation' => ::Scale::Api::Tasks::BaseTask,
+        'phonecall' => ::Scale::Api::Tasks::BaseTask,
+        'transcription' => ::Scale::Api::Tasks::BaseTask,
+        'pointannotation' => ::Scale::Api::Tasks::BaseTask,
+        'segmentannotation' => ::Scale::Api::Tasks::BaseTask
       }.freeze
 
       def initialize(client: nil, docs: [], limit: 99, offset: 0, has_more: false, params: {})

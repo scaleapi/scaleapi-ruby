@@ -2,17 +2,17 @@ class Scale
   attr_accessor :api_key, :callback_auth_key, :default_request_params, :logging
 
   VALID_TASK_TYPES = [
-    "datacollection".freeze,
-    "categorization".freeze,
-    "comparison".freeze,
-    "annotation".freeze,
-    "polygonannotation".freeze,
-    "lineannotation".freeze,
-    "transcription".freeze,
-    "audiotranscription".freeze,
-    "pointannotation".freeze,
-    "segmentannotation".freeze
-  ]
+    "datacollection",
+    "categorization",
+    "comparison",
+    "annotation",
+    "polygonannotation",
+    "lineannotation",
+    "transcription",
+    "audiotranscription",
+    "pointannotation",
+    "segmentannotation"
+  ].freeze
 
   def method_missing(methodId, *args, &block)
     str = methodId.id2name
@@ -64,9 +64,7 @@ class Scale
   end
 
   def create_task(type, args = {})
-    createPath = 'task/' + type
-    response = client.post(createPath, args)
-    Api::Tasks::BaseTask.new(JSON.parse(response.body))
+    client.create_task(type, args)
   end
 
   def build_callback(params, callback_key: nil)
@@ -87,8 +85,6 @@ end
 
 require 'scale/api'
 require 'scale/api/errors'
-require 'scale/api/callback'
 require 'scale/api/tasks'
-require 'scale/api/tasks/base_task'
-require 'json'
+require 'scale/api/callback'
 require 'scale/api/task_list'

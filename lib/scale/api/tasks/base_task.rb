@@ -4,14 +4,18 @@ class Scale
   class Api
     class Tasks
       class BaseTask
-        attr_accessor :client
-        ATTRIBUTES = %w(task_id type instruction params urgency response callback_url created_at status completed_at callback_succeeded_at metadata).freeze
-        ATTRIBUTES.each { |attr| attr_reader attr }
-
-        alias_method :id, :task_id
+        def method_missing(methodId, *args, &block)
+          str = methodId.id2name
+          value = @data[str]
+          if value
+            value
+          else
+            raise ArgumentError.new("Method `#{methodId}` doesn't exist.")
+          end
+        end
 
         def self.from_hash(hash)
-          klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(hash[:type] || hash['type']).to_s] || self
+          klass = self
           klass.new(hash)
         end
 
@@ -20,12 +24,8 @@ class Scale
         end
 
         def initialize(json = {})
-
-          ATTRIBUTES.each do |attr|
-            instance_variable_set "@#{attr}", json[attr]
-          end
-
-          @client = (json[:client] || json['client'])
+          @client = json.delete(:client) || json.delete('client')
+          @data = json
 
           tweak_attributes
         end
@@ -56,6 +56,14 @@ class Scale
 
         def callback_succeeded?
           !!callback_succeeded_at
+        end
+
+        def id
+          task_id
+        end
+
+        def raw_json
+          @data
         end
 
         protected
