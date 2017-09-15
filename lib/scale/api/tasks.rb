@@ -26,24 +26,18 @@ class Scale
       
       def find(task_id)
         response = client.get("task/#{task_id}")
-        BaseTask.from_hash(JSON.parse(response.body).merge('client' => client))
+        BaseTask.new(JSON.parse(response.body), client)
       end
 
       def cancel(task_id)
         response = client.post("task/#{task_id}/cancel")
-        BaseTask.from_hash(JSON.parse(response.body).merge('client' => client))
+        BaseTask.new(JSON.parse(response.body), client)
       end
 
       def create(args = {})
         raise ArgumentError.new('Task type is required') if (args[:type].nil? && args['type'].nil?)
-        klass = ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES[(args[:type] || args['type']).to_s]
-        
-        unless klass
-          raise ArgumentError.new('Unsupported task type. Supported task types: ' + ::Scale::Api::TaskList::TASK_TYPES_TO_CLASSNAMES.keys.join(','))
-        end
-
-        args.delete(:type)
-        klass.create(args.merge(client: client))
+        type = args.delete(:type)
+        client.create_task(type, args)
       end
 
       alias_method :all, :list

@@ -5,6 +5,8 @@ require 'json'
 class Scale
   class Api < Struct.new(:api_key, :callback_auth_key, :default_request_params, :logging)
     SCALE_API_URL = 'https://api.scaleapi.com/v1/'
+    SCALEAPI_GEM_INFO = Gem.loaded_specs["scaleapi"]
+    SCALE_RUBY_CLIENT_VERSION = SCALEAPI_GEM_INFO ? SCALEAPI_GEM_INFO.version : '0.1.1'.freeze
 
     def connection
       @connection ||= Faraday.new(:url => SCALE_API_URL) do |faraday|
@@ -20,7 +22,7 @@ class Scale
         req.url "#{SCALE_API_URL}#{url}"
         req.params.merge!(default_request_params.merge(params))
         req.headers['X-API-Client'] = "Ruby"
-        req.headers["X-API-Client-Version"] = '0.1.0'
+        req.headers["X-API-Client-Version"] = SCALE_RUBY_CLIENT_VERSION
       end
 
       if response.status != 200
@@ -41,7 +43,7 @@ class Scale
         req.headers['Content-Type'] = 'application/json'
         req.body = body.to_json
         req.headers['X-API-Client'] = "Ruby"
-        req.headers["X-API-Client-Version"] = '0.1.0'
+        req.headers["X-API-Client-Version"] = SCALE_RUBY_CLIENT_VERSION
       end
 
       if response.status != 200
@@ -69,7 +71,14 @@ class Scale
     rescue JSON::ParserError
       raise Scale::Api::InternalServerError
     end
+
+    def create_task(type, args = {})
+      response = post("task/${type}", args)
+      Api::Tasks::BaseTask.new(JSON.parse(response.body), self)
+    end
   end
 end
 
+require 'scale/api/tasks'
+require 'scale/api/tasks/base_task'
 require 'scale/api/errors'
