@@ -73,8 +73,7 @@ class Scale
     end
 
     def create_task(type, args = {})
-      createPath = 'task/' + type
-      response = post(createPath, args)
+      response = post("task/${type}", args)
       Api::Tasks::BaseTask.new(JSON.parse(response.body), self)
     end
   end

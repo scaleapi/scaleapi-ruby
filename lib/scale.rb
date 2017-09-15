@@ -19,9 +19,7 @@ class Scale
     match = /^create_([a-z_]+)_task$/.match(str)
     if match
       taskType = match[1].gsub(/[^a-z]/, '')
-      if taskType == "imagerecognition"
-        taskType = "annotation"
-      end
+      taskType = "annotation" if taskType == "imagerecognition"
       if VALID_TASK_TYPES.include?(taskType)
         create_task(match[1], *args)
       else
