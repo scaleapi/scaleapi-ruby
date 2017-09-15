@@ -14,17 +14,12 @@ class Scale
           end
         end
 
-        def self.from_hash(hash)
-          klass = self
-          klass.new(hash)
-        end
-
         def cancel!
           Tasks.new(client).cancel(id)
         end
 
-        def initialize(json = {})
-          @client = json.delete(:client) || json.delete('client')
+        def initialize(json = {}, theClient = nil)
+          @client = theClient
           @data = json
 
           tweak_attributes

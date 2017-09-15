@@ -7,24 +7,11 @@ class Scale
       extend Forwardable
       def_delegators :@docs, :each, :<<, :[], :[]=, :length, :count
       attr_accessor :client, :docs, :limit, :offset, :has_more, :params
-      TASK_TYPES_TO_CLASSNAMES = {
-        'audiotranscription' => ::Scale::Api::Tasks::BaseTask,
-        'categorization' => ::Scale::Api::Tasks::BaseTask,
-        'comparison' => ::Scale::Api::Tasks::BaseTask,
-        'datacollection' => ::Scale::Api::Tasks::BaseTask,
-        'annotation' => ::Scale::Api::Tasks::BaseTask,
-        'polygonannotation' => ::Scale::Api::Tasks::BaseTask,
-        'lineannotation' => ::Scale::Api::Tasks::BaseTask,
-        'phonecall' => ::Scale::Api::Tasks::BaseTask,
-        'transcription' => ::Scale::Api::Tasks::BaseTask,
-        'pointannotation' => ::Scale::Api::Tasks::BaseTask,
-        'segmentannotation' => ::Scale::Api::Tasks::BaseTask
-      }.freeze
 
       def initialize(client: nil, docs: [], limit: 99, offset: 0, has_more: false, params: {})
         self.client = client
         self.docs = docs.map do |doc|
-          ::Scale::Api::Tasks::BaseTask.from_hash(doc.merge('client' => client))
+          ::Scale::Api::Tasks::BaseTask.new(doc, client)
         end
 
         self.limit = limit

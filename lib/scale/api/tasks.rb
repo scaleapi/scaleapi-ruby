@@ -26,12 +26,12 @@ class Scale
       
       def find(task_id)
         response = client.get("task/#{task_id}")
-        BaseTask.from_hash(JSON.parse(response.body).merge('client' => client))
+        BaseTask.new(JSON.parse(response.body), client)
       end
 
       def cancel(task_id)
         response = client.post("task/#{task_id}/cancel")
-        BaseTask.from_hash(JSON.parse(response.body).merge('client' => client))
+        BaseTask.new(JSON.parse(response.body), client)
       end
 
       def create(args = {})
