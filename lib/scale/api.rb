@@ -6,7 +6,7 @@ class Scale
   class Api < Struct.new(:api_key, :callback_auth_key, :default_request_params, :logging)
     SCALE_API_URL = 'https://api.scaleapi.com/v1/'
     SCALEAPI_GEM_INFO = Gem.loaded_specs["scaleapi"]
-    SCALE_RUBY_CLIENT_VERSION = SCALEAPI_GEM_INFO ? SCALEAPI_GEM_INFO.version : '0.1.1'.freeze
+    SCALE_RUBY_CLIENT_VERSION = SCALEAPI_GEM_INFO ? SCALEAPI_GEM_INFO.version.to_s : '0.1.1'.freeze
 
     def connection
       @connection ||= Faraday.new(:url => SCALE_API_URL) do |faraday|
