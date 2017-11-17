@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "scaleapi"
-  spec.version       = "0.8.1"
+  spec.version       = "0.8.2"
   spec.authors       = ["Alexandr Wang"]
   spec.email         = ["alex@scaleapi.com", "roy@scaleapi.com"]
 

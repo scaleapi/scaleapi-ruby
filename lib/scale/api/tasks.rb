@@ -2,9 +2,15 @@ class Scale
   class Api
     class Tasks < Struct.new(:client)
       def list(start_time: nil, end_time: nil, limit: 99, offset: 0, type: nil, status: nil)
+        if start_time and not start_time.instance_of? String
+            start_time = start_time.iso8601
+        end
+        if end_time and not end_time.instance_of? String
+            end_time = end_time.iso8601
+        end
         params = {
-          start_time: start_time ? start_time.iso8601 : nil,
-          end_time: end_time ? end_time.iso8601 : nil,
+          start_time: start_time ? start_time : nil,
+          end_time: end_time ? end_time : nil,
           limit: limit,
           offset: offset,
           status: status,
