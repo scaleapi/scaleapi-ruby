@@ -51,7 +51,7 @@ For every type of task, you can pass in the following options when creating:
 - `urgency`: a string indicating how long the task should take, options are `immediate`, `day`, or `week`. The default is `day`.
 - `metadata`: a `Hash` that contains anything you want in it. Use it for storing data relevant to that task, such as an internal ID for your application to associate the task with. Note that the keys of the `Hash` will be returned as `String` rather than `Symbol`.
 
-### Categoriation Tasks
+### Categorization Tasks
 
 To create a [categorization task](https://docs.scaleapi.com/#create-categorization-task), run the following:
 ```ruby
