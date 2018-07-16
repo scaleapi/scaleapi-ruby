@@ -11,6 +11,7 @@ class Scale
     "transcription",
     "audiotranscription",
     "pointannotation",
+    "cuboidannotation",
     "segmentannotation"
   ].freeze
 
