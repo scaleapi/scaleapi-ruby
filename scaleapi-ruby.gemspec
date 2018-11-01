@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Official Ruby Client for Scale API}
   spec.description   = %q{Scale is an API For Human Intelligence. Get high quality results for all sorts of tasks within minutes. This is the official Ruby client.}
-  spec.homepage      = "https://www.scaleapi.com"
+  spec.homepage      = "https://scale.ai"
   spec.license       = "MIT"
 
 
