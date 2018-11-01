@@ -1,7 +1,7 @@
-# Scale API
-![Scale API Logo](https://scale.ai/static/global/facebook-card.png)
+# Scale
+![Scale Logo](https://scale.ai/static/global/facebook-card.png)
 
-This is the official Scale API RubyGem (`scaleapi`).
+This is the official Scale RubyGem (`scaleapi`).
 
 [Scale](https://scale.ai) is an API for Human Intelligence. Businesses like Alphabet (Google), Uber, Proctor & Gamble, Houzz, and many more use us to power tasks such as:
 - Draw bounding boxes and label parts of images (to train ML algorithms for self-driving cars)
@@ -30,7 +30,7 @@ Or install it yourself as:
 
 ## Usage
 
-First, initialize the Scale API client:
+First, initialize the Scale client:
 
 ```ruby
 require 'scale'
@@ -38,7 +38,7 @@ require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
 ```
 
-Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale API client. You can also set `default_request_params` which is a `Hash` that will be included in every request sent to Scale (either as a query string param or part of the request body).
+Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale client. You can also set `default_request_params` which is a `Hash` that will be included in every request sent to Scale (either as a query string param or part of the request body).
 
 If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://scale.ai/dashboard). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
 
@@ -516,7 +516,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/scalea
 
 Currently, this repository has no tests - and adding tests using RSpec would make a for a great PR :)
 
-Thanks to [wikiti](https://github.com/wikiti/) for creating the first unofficial Scale API Ruby Client!
+Thanks to [wikiti](https://github.com/wikiti/) for creating the first unofficial Scale Ruby Client!
 
 ## License
 
