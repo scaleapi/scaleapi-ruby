@@ -1,0 +1,20 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.scaleapi.com/v1/task/cuboidannotation
+    body:
+      encoding: UTF-8
+      string: '{"callback_url":"http://www.example.com/callback","instruction":"Draw
+        a cuboid around each car or truck.","attachment_type":"image","attachment":"http://i.imgur.com/v4cBreD.jpg","objects_to_annotate":["car","truck"]}'
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"task_id":"5c84d0f32e5be1004a45c510","created_at":"2019-03-10T08:55:16.082Z","completed_at":"2019-03-10T08:55:16.128Z","callback_url":"http://www.example.com/callback","type":"cuboidannotation","status":"completed","instruction":"Draw
+        a cuboid around each car or truck.","params":{"attachment":"http://i.imgur.com/v4cBreD.jpg","attachment_type":"image","objects_to_annotate":["car","truck"],"with_labels":true,"min_annotations":0,"max_annotations":0},"is_test":true,"urgency":"standard","metadata":{},"callback_succeeded":true,"processed_attachments":[],"response":{"annotations":[{"vertices":[{"description":"face-topleft","y":70,"x":100,"type":"vertex"},{"description":"face-bottomleft","y":296,"x":100,"type":"vertex"},{"description":"face-topright","y":70,"x":320,"type":"vertex"},{"description":"face-bottomright","y":296,"x":320,"type":"vertex"},{"description":"side-topcorner","y":82,"x":441,"type":"vertex"},{"description":"side-bottomcorner","y":198,"x":441,"type":"vertex"}],"label":"car"}]}}'
+    http_version: 
+  recorded_at: Sun, 10 Mar 2019 08:55:16 GMT
+recorded_with: VCR 4.0.0

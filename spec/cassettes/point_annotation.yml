@@ -1,0 +1,20 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.scaleapi.com/v1/task/pointannotation
+    body:
+      encoding: UTF-8
+      string: '{"callback_url":"http://www.example.com/callback","instruction":"Draw
+        a point on every **headlight** and **brakelight** of a car in the image.","attachment_type":"image","attachment":"http://i.imgur.com/XOJbalC.jpg","objects_to_annotate":["headlight","brakelight"],"with_labels":true}'
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"task_id":"5c84d0f74d286e0056a9c39a","created_at":"2019-03-10T08:55:19.964Z","completed_at":"2019-03-10T08:55:20.009Z","callback_url":"http://www.example.com/callback","type":"pointannotation","status":"completed","instruction":"Draw
+        a point on every **headlight** and **brakelight** of a car in the image.","params":{"attachment":"http://i.imgur.com/XOJbalC.jpg","attachment_type":"image","objects_to_annotate":["headlight","brakelight"],"with_labels":true},"is_test":true,"urgency":"standard","metadata":{},"callback_succeeded":true,"processed_attachments":[]}'
+    http_version: 
+  recorded_at: Sun, 10 Mar 2019 08:55:20 GMT
+recorded_with: VCR 4.0.0

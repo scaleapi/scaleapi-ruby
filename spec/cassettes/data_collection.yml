@@ -1,0 +1,23 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.scaleapi.com/v1/task/datacollection
+    body:
+      encoding: UTF-8
+      string: '{"callback_url":"http://www.example.com/callback","instruction":"Find
+        the URL for the hiring page for the company with attached website.","attachment":"https://www.scaleapi.com/","attachment_type":"website","fields":{"hiring_page":"Hiring
+        Page URL"}}'
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"task_id":"5c84d0f562e7490079ffae3b","created_at":"2019-03-10T08:55:17.126Z","completed_at":"2019-03-10T08:55:17.173Z","callback_url":"http://www.example.com/callback","type":"datacollection","status":"completed","instruction":"Find
+        the URL for the hiring page for the company with attached website.","params":{"attachment_type":"website","attachment":"https://www.scaleapi.com/","fields":{"hiring_page":"Hiring
+        Page URL"}},"is_test":true,"urgency":"standard","metadata":{},"callback_succeeded":true,"processed_attachments":[],"response":{"fields":{"hiring_page":"test
+        response"},"time_spent_in_seconds":15}}'
+    http_version: 
+  recorded_at: Sun, 10 Mar 2019 08:55:17 GMT
+recorded_with: VCR 4.0.0

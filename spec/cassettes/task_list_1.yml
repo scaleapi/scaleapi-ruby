@@ -1,0 +1,23 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.scaleapi.com/v1/tasks?callback_url&end_time&limit=2&offset=0&start_time&status&type
+    body:
+      encoding: US-ASCII
+      string: ''
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"docs":[{"task_id":"5c849c3fe95619006b071dd4","created_at":"2019-03-10T05:10:23.260Z","completed_at":"2019-03-10T05:10:25.224Z","callback_url":"http://www.example.com/callback","type":"segmentannotation","status":"completed","instruction":"Please
+        segment the image using the given labels.","params":{"attachment":"http://i.imgur.com/XOJbalC.jpg","attachment_type":"image","labels":["background","road","vegetation","lane
+        marking"],"instance_labels":["vehicle","pedestrian"],"allow_unlabeled":false,"allow_parent_labels":false},"is_test":true,"urgency":"day","metadata":{},"processed_attachments":[],"response":{"annotations":{"unlabeled":"https://scaleapi-results.s3.amazonaws.com/0704357e-de4f-4247-b4fe-3347039624bb","labeled":{"background":"https://scaleapi-results.s3.amazonaws.com/e405b86f-3f47-41ab-9ea3-aaedd6f34c53","road":null,"vegetation":null,"lane
+        marking":null},"combined":{"image":"https://scaleapi-results.s3.amazonaws.com/dae72038-eb78-4e89-b994-1ca249ad888a","indexedImage":"https://scaleapi-results.s3.amazonaws.com/8d57af40-a7d5-4514-aff0-f033ab90b55f"}},"labelMapping":{"background":{"index":1,"color":"#ff0000","attributes":null},"road":{"index":2,"color":"#ffff00","attributes":null},"vegetation":{"index":3,"color":"#00ff00","attributes":null},"lane
+        marking":{"index":4,"color":"#00ffff","attributes":null}}}},{"task_id":"5c849b4fe95619006b071d5d","created_at":"2019-03-10T05:06:23.993Z","completed_at":"2019-03-10T05:06:24.039Z","callback_url":"http://www.example.com/callback","type":"cuboidannotation","status":"completed","instruction":"Draw
+        a cuboid around each car or truck.","params":{"attachment":"http://i.imgur.com/v4cBreD.jpg","attachment_type":"image","objects_to_annotate":["car","truck"],"with_labels":true,"min_annotations":0,"max_annotations":0},"is_test":true,"urgency":"day","metadata":{},"processed_attachments":[],"response":{"annotations":[{"vertices":[{"description":"face-topleft","y":70,"x":100,"type":"vertex"},{"description":"face-bottomleft","y":296,"x":100,"type":"vertex"},{"description":"face-topright","y":70,"x":320,"type":"vertex"},{"description":"face-bottomright","y":296,"x":320,"type":"vertex"},{"description":"side-topcorner","y":82,"x":441,"type":"vertex"},{"description":"side-bottomcorner","y":198,"x":441,"type":"vertex"}],"label":"car"}]}}],"total":3,"limit":2,"offset":0,"has_more":true}'
+    http_version: 
+  recorded_at: Sun, 10 Mar 2019 06:00:56 GMT
+recorded_with: VCR 4.0.0
