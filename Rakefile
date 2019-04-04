@@ -1,2 +1,7 @@
 require "bundler/gem_tasks"
-task :default => :spec
+require 'rspec/core/rake_task'
+
+import './tasks/spec_production.rake'
+
+RSpec::Core::RakeTask.new(:spec)
+task default: :spec

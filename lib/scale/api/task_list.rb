@@ -25,11 +25,10 @@ class Scale
       end
 
       def page
-        (offset + (limit * 1)) / limit
+        (offset + limit) / limit
       end
 
       def next_page
-        next_page_params = params.dup
         params[:offset] = params[:limit] + params[:offset]
         Scale::Api::Tasks.new(client).list(params)
       end

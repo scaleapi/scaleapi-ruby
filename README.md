@@ -189,12 +189,12 @@ scale.create_annotation_task({
   with_labels: true,
   examples: [
     {
-      correct: false,
+      correct: true,
       image: 'http://i.imgur.com/lj6e98s.jpg',
       explanation: 'The boxes are tight and accurate'
     },
     {
-      correct: true,
+      correct: false,
       image: 'http://i.imgur.com/HIrvIDq.jpg',
       explanation: 'The boxes are neither accurate nor complete'
     }
@@ -221,12 +221,12 @@ scale.tasks.create({
   with_labels: true,
   examples: [
     {
-      correct: false,
+      correct: true,
       image: 'http://i.imgur.com/lj6e98s.jpg',
       explanation: 'The boxes are tight and accurate'
     },
     {
-      correct: true,
+      correct: false,
       image: 'http://i.imgur.com/HIrvIDq.jpg',
       explanation: 'The boxes are neither accurate nor complete'
     }
@@ -510,13 +510,17 @@ After checking out the repo, run `bin/setup` to install dependencies. You can al
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `scaleapi-ruby.gemspec`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+To test locally, run `bundle exec rspec`. By default, client - server communication is mocked by [vcr](https://github.com/vcr/vcr), which uses local [casettes](spec/cassettes) recorded from production server.
+To test against production server, set a test api key as `SCALE_TEST_API_KEY` and run `bundle exec rake spec:production`, which sets environment variable `SCALE_TEST_SERVER` to `production`. It will also update new client - server communication in the cassette.
+Please note that changes in the cassettes will break existing specs. This is because 1) the server may return random results for test api key, and 2) some of the cassettes have been modified specifically for the specs.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/scaleapi/scaleapi-ruby.
 
-Currently, this repository has no tests - and adding tests using RSpec would make a for a great PR :)
 
-Thanks to [wikiti](https://github.com/wikiti/) for creating the first unofficial Scale Ruby Client!
+Thanks to [wikiti](https://github.com/wikiti/) for creating the first unofficial Scale API Ruby Client!
+
 
 ## License
 
