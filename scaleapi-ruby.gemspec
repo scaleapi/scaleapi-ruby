@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "scaleapi"
-  spec.version       = "0.8.2"
+  spec.version       = "0.9.0"
   spec.authors       = ["Alexandr Wang"]
   spec.email         = ["alex@scaleapi.com", "roy@scaleapi.com"]
 
   spec.summary       = %q{Official Ruby Client for Scale API}
   spec.description   = %q{Scale is an API For Human Intelligence. Get high quality results for all sorts of tasks within minutes. This is the official Ruby client.}
-  spec.homepage      = "https://www.scaleapi.com"
+  spec.homepage      = "https://scale.ai"
   spec.license       = "MIT"
 
 
