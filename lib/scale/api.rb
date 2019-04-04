@@ -4,7 +4,7 @@ require 'json'
 
 class Scale
   class Api < Struct.new(:api_key, :callback_auth_key, :default_request_params, :logging)
-    SCALE_API_URL = 'https://api.scaleapi.com/v1/'
+    SCALE_API_URL = 'https://api.scale.ai/v1/'
     SCALEAPI_GEM_INFO = Gem.loaded_specs["scaleapi"]
     SCALE_RUBY_CLIENT_VERSION = SCALEAPI_GEM_INFO ? SCALEAPI_GEM_INFO.version.to_s : '0.1.1'.freeze
 
