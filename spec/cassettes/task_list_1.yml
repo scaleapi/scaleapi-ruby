@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.scaleapi.com/v1/tasks?callback_url&end_time&limit=2&offset=0&start_time&status&type
+    uri: https://api.scale.ai/v1/tasks?callback_url&end_time&limit=2&offset=0&start_time&status&type
     body:
       encoding: US-ASCII
       string: ''
