@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.scaleapi.com/v1/task/audiotranscription
+    uri: https://api.scale.ai/v1/task/audiotranscription
     body:
       encoding: UTF-8
       string: '{"callback_url":"http://www.example.com/callback","attachment_type":"audio","attachment":"https://storage.googleapis.com/deepmind-media/pixie/knowing-what-to-say/second-list/speaker-3.wav","verbatim":false}'

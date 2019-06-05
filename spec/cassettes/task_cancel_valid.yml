@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.scaleapi.com/v1/task/5c84d0fe958593004f13e5ba/cancel
+    uri: https://api.scale.ai/v1/task/5c84d0fe958593004f13e5ba/cancel
     body:
       encoding: US-ASCII
       string: '{"callback_url":null}'

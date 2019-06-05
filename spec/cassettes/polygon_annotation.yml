@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.scaleapi.com/v1/task/polygonannotation
+    uri: https://api.scale.ai/v1/task/polygonannotation
     body:
       encoding: UTF-8
       string: '{"callback_url":"http://www.example.com/callback","instruction":"Draw
