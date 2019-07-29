@@ -1,16 +1,16 @@
 # Scale
-![Scale Logo](https://scale.ai/static/global/facebook-card.png)
+![Scale Logo](https://scale.com/static/global/facebook-card.png)
 
 This is the official Scale RubyGem (`scaleapi`).
 
-[Scale](https://scale.ai) is an API for Human Intelligence. Businesses like Alphabet (Google), Uber, Proctor & Gamble, Houzz, and many more use us to power tasks such as:
+[Scale](https://scale.com) is an API for Human Intelligence. Businesses like Alphabet (Google), Uber, Proctor & Gamble, Houzz, and many more use us to power tasks such as:
 - Draw bounding boxes and label parts of images (to train ML algorithms for self-driving cars)
 - Transcribe documents, images, and webpages
 - Scrape websites
 - Triage support tickets
 - Categorize and compare images, documents, and webpages
 
-Scale is actively hiring software engineers - [apply here](https://scale.ai/about#jobs).
+Scale is actively hiring software engineers - [apply here](https://scale.com/about#jobs).
 
 ## Installation
 
@@ -40,7 +40,7 @@ scale = Scale.new(api_key: 'SCALE_API_KEY')
 
 Note that you can optionally provide a `callback_auth_key` and `callback_url` when initializing the Scale client. You can also set `default_request_params` which is a `Hash` that will be included in every request sent to Scale (either as a query string param or part of the request body).
 
-If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://scale.ai/dashboard). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
+If you're having trouble finding your API Key or Callback Auth Key, then go to the [Scale Dashboard](https://scale.com/dashboard). If you set a default `callback_url` in your account settings, you won't need to pass it in everytime.
 
 ## Creating Tasks
 
@@ -53,7 +53,7 @@ For every type of task, you can pass in the following options when creating:
 
 ### Categorization Tasks
 
-To create a [categorization task](https://docs.scale.ai/#create-categorization-task), run the following:
+To create a [categorization task](https://docs.scale.com/#create-categorization-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -86,11 +86,11 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::Categorization` object.
 
-[Read more about creating categorization tasks](https://docs.scale.ai/#create-categorization-task)
+[Read more about creating categorization tasks](https://docs.scale.com/#create-categorization-task)
 
 ### Comparison Tasks
 
-To create a [comparison task](https://docs.scale.ai/#create-comparison-task), run the following:
+To create a [comparison task](https://docs.scale.com/#create-comparison-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -129,11 +129,11 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::Comparison` object.
 
-[Read more about creating comparison tasks](https://docs.scale.ai/#create-comparison-task)
+[Read more about creating comparison tasks](https://docs.scale.com/#create-comparison-task)
 
 ### Datacollection Tasks
 
-To create a [datacollection task](https://docs.scale.ai/#create-datacollection-task), run the following:
+To create a [datacollection task](https://docs.scale.com/#create-datacollection-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -141,7 +141,7 @@ scale = Scale.new(api_key: 'SCALE_API_KEY')
 scale.create_datacollection_task({
   callback_url: 'http://www.example.com/callback',
   instruction: 'Find the URL for the hiring page for the company with attached website.',
-  attachment: 'https://scale.ai/',
+  attachment: 'https://scale.com/',
   attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
@@ -160,7 +160,7 @@ scale.tasks.create({
   type: 'datacollection',
   callback_url: 'http://www.example.com/callback',
   instruction: 'Find the URL for the hiring page for the company with attached website.',
-  attachment: 'https://scale.ai/',
+  attachment: 'https://scale.com/',
   attachment_type: 'website',
   fields: {
     hiring_page: 'Hiring Page URL'
@@ -170,12 +170,12 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::Datacollection` object.
 
-[Read more about creating datacollection tasks](https://docs.scale.ai/#create-data-collection-task)
+[Read more about creating datacollection tasks](https://docs.scale.com/#create-data-collection-task)
 
 
 ### Image Recognition Tasks
 
-To create an [image recognition task](https://docs.scale.ai/#create-image-recognition-task), run the following:
+To create an [image recognition task](https://docs.scale.com/#create-image-recognition-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -236,11 +236,11 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::ImageRecognition` object.
 
-[Read more about creating image recognition tasks](https://docs.scale.ai/#create-image-recognition-task)
+[Read more about creating image recognition tasks](https://docs.scale.com/#create-image-recognition-task)
 
 ### Transcription Tasks
 
-To create a [transcription task](https://docs.scale.ai/#create-transcription-task), run the following:
+To create a [transcription task](https://docs.scale.com/#create-transcription-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -278,12 +278,12 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::Transcription` object.
 
-[Read more about creating transcription tasks](https://docs.scale.ai/#create-transcription-task)
+[Read more about creating transcription tasks](https://docs.scale.com/#create-transcription-task)
 
 
 ### Audio Transcription Tasks
 
-To create an [audio transcription task](https://docs.scale.ai/#create-audio-transcription-task), run the following:
+To create an [audio transcription task](https://docs.scale.com/#create-audio-transcription-task), run the following:
 ```ruby
 require 'scale'
 scale = Scale.new(api_key: 'SCALE_API_KEY')
@@ -314,7 +314,7 @@ scale.tasks.create({
 
 This will also return a `Scale::Api::Tasks::AudioTranscription` object.
 
-[Read more about creating audio transcription tasks](https://docs.scale.ai/#create-audio-transcription-task)
+[Read more about creating audio transcription tasks](https://docs.scale.com/#create-audio-transcription-task)
 
 ## Listing Tasks
 
@@ -383,7 +383,7 @@ second_page = first_page.next_page
 
 `scale.tasks.list` is aliased to `scale.tasks.where` and `scale.tasks.all`.
 
-For more information, [read our documentation](https://docs.scale.ai/#list-all-tasks)
+For more information, [read our documentation](https://docs.scale.com/#list-all-tasks)
 
 ## Finding tasks by ID
 

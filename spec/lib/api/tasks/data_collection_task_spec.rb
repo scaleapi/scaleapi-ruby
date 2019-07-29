@@ -6,7 +6,7 @@ RSpec.describe Scale::Api::Tasks, 'data collection' do
       scale.create_datacollection_task(
         callback_url: 'http://www.example.com/callback',
         instruction: 'Find the URL for the hiring page for the company with attached website.',
-        attachment: 'https://www.scaleapi.com/',
+        attachment: 'https://scale.com/',
         attachment_type: 'website',
         fields: {
           hiring_page: 'Hiring Page URL'

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.scale.ai/v1/task/invalid_task_id?callback_url
+    uri: https://api.scale.com/v1/task/invalid_task_id?callback_url
     body:
       encoding: US-ASCII
       string: ''
