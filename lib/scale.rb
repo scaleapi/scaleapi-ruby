@@ -12,7 +12,8 @@ class Scale
     "audiotranscription",
     "pointannotation",
     "cuboidannotation",
-    "segmentannotation"
+    "segmentannotation",
+    "namedentityrecognition"
   ].freeze
 
   def method_missing(methodId, *args, &block)
