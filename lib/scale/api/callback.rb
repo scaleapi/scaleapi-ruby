@@ -19,7 +19,7 @@ class Scale
       end
 
       def self.valid_callback_auth_key?(callback_key, request_callback_key)
-        !!(callback_key && request_callback_key && request_callback_key == callback_key)
+        callback_key && request_callback_key && request_callback_key == callback_key
       end
     end
   end
